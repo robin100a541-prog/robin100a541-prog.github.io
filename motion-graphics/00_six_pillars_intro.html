@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Six Pillars of Football – Intro</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    background: #00FF00;
+    overflow: hidden;
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* ── Decorative top line ── */
+  .line-top {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(-220px);
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    animation: expandLine 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+  }
+  .line-bottom {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(220px);
+    width: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    animation: expandLine 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+  }
+  @keyframes expandLine {
+    to { width: 700px; }
+  }
+
+  /* ── "SIX" ── */
+  .word-six {
+    font-size: 240px;
+    font-weight: 900;
+    letter-spacing: -8px;
+    line-height: 1;
+    background: linear-gradient(135deg, #FFD700 0%, #FFF8DC 40%, #C9A84C 70%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    transform: translateY(80px) scale(0.85);
+    animation: riseIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 40px rgba(255,215,0,0.5));
+  }
+
+  /* ── "PILLARS" ── */
+  .word-pillars {
+    font-size: 148px;
+    font-weight: 900;
+    letter-spacing: 28px;
+    color: #FFFFFF;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(60px);
+    animation: riseIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.18s forwards;
+    text-shadow:
+      0 0 60px rgba(255,255,255,0.3),
+      0 4px 24px rgba(0,0,0,0.6);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── "OF FOOTBALL" ── */
+  .word-sub {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: 18px;
+    color: #FFD700;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: riseIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.38s forwards;
+    margin-top: 18px;
+    text-shadow: 0 2px 16px rgba(201,168,76,0.6);
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes riseIn {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* ── Glow orb behind SIX ── */
+  .glow-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,215,0,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseOrb 3s ease-in-out 0.5s infinite;
+    pointer-events: none;
+  }
+  @keyframes pulseOrb {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
+  }
+
+  /* ── Corner accents ── */
+  .corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    animation: fadeCorner 0.5s ease 0.7s forwards;
+  }
+  .corner::before, .corner::after {
+    content: '';
+    position: absolute;
+    background: #FFD700;
+  }
+  .corner::before { width: 100%; height: 3px; top: 0; left: 0; }
+  .corner::after  { width: 3px; height: 100%; top: 0; left: 0; }
+  .corner.tl { top: 140px; left: 120px; }
+  .corner.tr { top: 140px; right: 120px; transform: scaleX(-1); }
+  .corner.bl { bottom: 140px; left: 120px; transform: scaleY(-1); }
+  .corner.br { bottom: 140px; right: 120px; transform: scale(-1,-1); }
+  @keyframes fadeCorner { to { opacity: 1; } }
+
+  /* ── Shimmer scan line ── */
+  .shimmer {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255,255,255,0.06) 50%,
+      transparent 60%
+    );
+    animation: shimmerScan 2.4s ease-in-out 0.8s infinite;
+    pointer-events: none;
+  }
+  @keyframes shimmerScan {
+    0%   { left: -60%; }
+    100% { left: 160%; }
+  }
+
+  /* ── Floating particles ── */
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FFD700;
+    opacity: 0;
+    animation: floatUp var(--dur) ease-out var(--delay) infinite;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 0;   transform: translateY(0)    scale(0.5); }
+    20%  { opacity: 0.8; }
+    100% { opacity: 0;   transform: translateY(-300px) scale(0.1); }
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="glow-orb"></div>
+  <div class="shimmer"></div>
+
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <div class="line-top"></div>
+
+  <div class="word-six">SIX</div>
+  <div class="word-pillars">PILLARS</div>
+  <div class="word-sub">OF FOOTBALL</div>
+
+  <div class="line-bottom"></div>
+</div>
+
+<script>
+  // Spawn floating gold particles
+  const scene = document.querySelector('.scene');
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      bottom: ${Math.random() * 40}%;
+      --dur: ${2.5 + Math.random() * 3}s;
+      --delay: ${Math.random() * 3}s;
+      width: ${3 + Math.random() * 5}px;
+      height: ${3 + Math.random() * 5}px;
+      opacity: 0;
+    `;
+    scene.appendChild(p);
+  }
+</script>
+</body>
+</html>

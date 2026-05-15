@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Pillar 02 – TACTICAL</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    background: #00FF00;
+    overflow: hidden;
+    font-family: 'Arial Black', 'Impact', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Glow orb ── */
+  .glow-orb {
+    position: absolute;
+    width: 720px;
+    height: 720px;
+    background: radial-gradient(circle, rgba(255,107,53,0.28) 0%, transparent 68%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseOrb 3.2s ease-in-out 0.4s infinite;
+    pointer-events: none;
+  }
+  @keyframes pulseOrb {
+    0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1);    }
+    50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  /* ── Horizontal accent lines ── */
+  .line {
+    position: absolute;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .line-top    { top: calc(50% - 210px); animation: expandLine 0.55s cubic-bezier(0.16,1,0.3,1) 0.15s forwards; }
+  .line-bottom { top: calc(50% + 185px); animation: expandLine 0.55s cubic-bezier(0.16,1,0.3,1) 0.25s forwards; }
+  @keyframes expandLine { to { width: 680px; } }
+
+  /* ── Pillar number badge ── */
+  .badge {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: #FF6B35;
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: slideRight 0.55s cubic-bezier(0.16,1,0.3,1) 0.0s forwards;
+    text-shadow: 0 0 30px rgba(255,107,53,0.28);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 24px;
+  }
+  /* thin underline on badge */
+  .badge::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 3px;
+    background: #FF6B35;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── THE ── */
+  .word-the {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: 20px;
+    color: rgba(255,255,255,0.65);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: riseIn 0.5s cubic-bezier(0.16,1,0.3,1) 0.18s forwards;
+    position: relative;
+    z-index: 2;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  /* ── PILLAR NAME ── */
+  .word-name {
+    font-size: 158px;
+    font-weight: 900;
+    letter-spacing: -4px;
+    color: #FFFFFF;
+    line-height: 0.92;
+    opacity: 0;
+    transform: translateY(70px) scale(0.88);
+    animation: riseIn 0.7s cubic-bezier(0.16,1,0.3,1) 0.28s forwards;
+    text-shadow:
+      0 0 80px rgba(255,107,53,0.28),
+      0 6px 32px rgba(0,0,0,0.7);
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  /* ── PILLAR label ── */
+  .word-pillar {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 24px;
+    background: linear-gradient(135deg, #FF6B35 0%, #FFFFFF 60%, #FF6B35 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: riseIn 0.6s cubic-bezier(0.16,1,0.3,1) 0.42s forwards;
+    margin-top: 18px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(255,107,53,0.28));
+  }
+
+  @keyframes riseIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes slideRight {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── Corner accents ── */
+  .corner {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    opacity: 0;
+    animation: fadeCorner 0.4s ease 0.65s forwards;
+  }
+  .corner::before, .corner::after {
+    content: '';
+    position: absolute;
+    background: #FF6B35;
+  }
+  .corner::before { width: 100%; height: 3px; top: 0; left: 0; }
+  .corner::after  { width: 3px; height: 100%; top: 0; left: 0; }
+  .corner.tl { top: 140px; left: 110px; }
+  .corner.tr { top: 140px; right: 110px; transform: scaleX(-1); }
+  .corner.bl { bottom: 140px; left: 110px; transform: scaleY(-1); }
+  .corner.br { bottom: 140px; right: 110px; transform: scale(-1,-1); }
+  @keyframes fadeCorner { to { opacity: 1; } }
+
+  /* ── Shimmer sweep ── */
+  .shimmer {
+    position: absolute;
+    top: 0; left: -60%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(
+      108deg,
+      transparent 38%,
+      rgba(255,255,255,0.07) 50%,
+      transparent 62%
+    );
+    animation: shimmerScan 2.6s ease-in-out 0.6s infinite;
+    pointer-events: none;
+  }
+  @keyframes shimmerScan {
+    0%   { left: -60%; }
+    100% { left: 160%; }
+  }
+
+  /* ── Particles ── */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #FF6B35;
+    opacity: 0;
+    animation: floatUp var(--dur) ease-out var(--delay) infinite;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 0;   transform: translateY(0)      scale(0.5); }
+    20%  { opacity: 0.9; }
+    100% { opacity: 0;   transform: translateY(-320px)  scale(0.1); }
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="glow-orb"></div>
+  <div class="shimmer"></div>
+
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <div class="line line-top"></div>
+
+  <div class="badge">PILLAR 02</div>
+  <div class="word-the">THE</div>
+  <div class="word-name">TACTICAL</div>
+  <div class="word-pillar">PILLAR</div>
+
+  <div class="line line-bottom"></div>
+</div>
+
+<script>
+  const scene = document.querySelector('.scene');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      bottom: ${Math.random() * 45}%;
+      --dur: ${2.8 + Math.random() * 3}s;
+      --delay: ${Math.random() * 3.5}s;
+      width: ${3 + Math.random() * 5}px;
+      height: ${3 + Math.random() * 5}px;
+    `;
+    scene.appendChild(p);
+  }
+</script>
+</body>
+</html>
