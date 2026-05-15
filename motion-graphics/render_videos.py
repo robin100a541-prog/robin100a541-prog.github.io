@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Render Six Pillars motion graphics as green-screen MOV files for DaVinci Resolve.
-Each animation is 3 seconds @ 30fps (90 frames), 1080x1920px.
+Six Pillars — Premium Glass Card motion graphics.
+Black background, 1080x1920, 30fps, 3s.
+DaVinci Resolve: place above footage → Inspector → Composite Mode → SCREEN
 """
 
 from PIL import Image, ImageDraw, ImageFont
@@ -11,270 +12,246 @@ OUT_DIR   = "/home/user/robin-/motion-graphics/videos"
 FRAME_DIR = "/home/user/robin-/motion-graphics/_frames"
 W, H      = 1080, 1920
 FPS       = 30
-DURATION  = 3.0          # seconds
-FRAMES    = int(FPS * DURATION)
-GREEN     = (0, 255, 0)
+FRAMES    = 90   # 3 seconds
 
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# ── Helpers ──────────────────────────────────────────────────────────────────
-
-def ease_out(t):
-    """Cubic ease-out."""
-    return 1 - (1 - t) ** 3
+# ── Easing ────────────────────────────────────────────────────────────────────
 
 def clamp(v, lo=0.0, hi=1.0):
     return max(lo, min(hi, v))
 
-def progress(frame, start_s, duration_s):
-    """0→1 progress for an animation starting at start_s over duration_s."""
-    t = frame / FPS
-    return clamp((t - start_s) / duration_s)
+def prog(frame, start_s, dur_s):
+    return clamp((frame / FPS - start_s) / dur_s)
 
-def hex_to_rgb(h):
+def ease_out(t):
+    t = clamp(t)
+    return 1 - (1 - t) ** 3
+
+def ease_out_back(t):
+    """Cubic ease-out with slight overshoot — snappy premium pop."""
+    t = clamp(t)
+    c1, c3 = 1.70158, 2.70158
+    return 1 + c3 * (t - 1) ** 3 + c1 * (t - 1) ** 2
+
+# ── Font ──────────────────────────────────────────────────────────────────────
+
+FONT_PATHS = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+    "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+]
+def font(size):
+    for p in FONT_PATHS:
+        if os.path.exists(p):
+            return ImageFont.truetype(p, size)
+    return ImageFont.load_default()
+
+def tsize(draw, txt, fnt):
+    bb = draw.textbbox((0, 0), txt, font=fnt)
+    return bb[2] - bb[0], bb[3] - bb[1]
+
+def draw_tc(draw, txt, cx, cy, fnt, rgb, a=255):
+    tw, th = tsize(draw, txt, fnt)
+    r, g, b = rgb
+    draw.text((cx - tw // 2, cy - th // 2), txt, font=fnt, fill=(r, g, b, a))
+
+# ── Compositing fix ───────────────────────────────────────────────────────────
+
+def finalize(img):
+    """Properly composite RGBA layers over black background → RGB."""
+    black = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    return Image.alpha_composite(black, img).convert("RGB")
+
+# ── Glass panel ───────────────────────────────────────────────────────────────
+
+def draw_glass(draw, cx, cy, pw, ph, pop_p, accent_rgb, radius=30):
+    """
+    Premium frosted-glass card.  pop_p 0→1 drives spring scale-in.
+    Works with Screen blend mode in DaVinci — dark panel frosting,
+    bright white border/glow, full-brightness text.
+    """
+    scale = clamp(ease_out_back(pop_p), 0.0, 1.08)
+    w  = int(pw * scale)
+    h  = int(ph * scale)
+    if w < 4 or h < 4:
+        return 0, 0, W, H
+    x0 = cx - w // 2;  y0 = cy - h // 2
+    x1 = cx + w // 2;  y1 = cy + h // 2
+
+    fade = clamp(pop_p * 2.2)   # alpha envelope
+    r, g, b = accent_rgb
+
+    # ── Colour glow halo (soft layers outward)
+    for i in range(8, 0, -1):
+        pad = i * 10
+        a   = int(40 * fade * (i / 8))
+        draw.rounded_rectangle(
+            [x0-pad, y0-pad, x1+pad, y1+pad],
+            radius=radius+pad, fill=(r, g, b, a))
+
+    # ── White soft halo (depth / inner light)
+    for i in range(5, 0, -1):
+        pad = i * 5
+        a   = int(18 * fade)
+        draw.rounded_rectangle(
+            [x0-pad, y0-pad, x1+pad, y1+pad],
+            radius=radius+pad, fill=(255, 255, 255, a))
+
+    # ── Glass body fill (frosted, very subtle over black)
+    draw.rounded_rectangle([x0, y0, x1, y1], radius=radius,
+                           fill=(255, 255, 255, int(38 * fade)))
+
+    # ── Top-edge specular highlight (glass catching light)
+    hl = min(h // 5, 70)
+    if x1-2 > x0+2 and y0+hl > y0+2:
+        draw.rounded_rectangle([x0+2, y0+2, x1-2, y0+hl],
+                               radius=radius,
+                               fill=(255, 255, 255, int(45 * fade)))
+
+    # ── Crisp white border
+    draw.rounded_rectangle([x0, y0, x1, y1], radius=radius,
+                           outline=(255, 255, 255, int(200 * fade)), width=2)
+
+    # ── Accent colour bar at bottom of panel
+    lw = int(w * 0.52)
+    draw.rectangle([cx - lw//2, y1-5, cx + lw//2, y1-2],
+                   fill=(r, g, b, int(230 * fade)))
+
+    return x0, y0, x1, y1
+
+# ── Text reveal ───────────────────────────────────────────────────────────────
+
+def reveal(draw, txt, cx, cy, fnt, rgb, p, slide=30):
+    if p <= 0:
+        return
+    p2 = ease_out(p)
+    a  = int(255 * clamp(p * 2.5))
+    draw_tc(draw, txt, cx, cy + int(slide * (1 - p2)), fnt, rgb, a)
+
+# ── hex to rgb ────────────────────────────────────────────────────────────────
+
+def h2r(h):
     h = h.lstrip('#')
     return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
-def blend_color(c, alpha):
-    """Blend color c over green at alpha."""
-    r = int(c[0] * alpha + GREEN[0] * (1 - alpha))
-    g = int(c[1] * alpha + GREEN[1] * (1 - alpha))
-    b = int(c[2] * alpha + GREEN[2] * (1 - alpha))
-    return (r, g, b)
-
-def try_font(size):
-    for name in [
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
-        "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
-    ]:
-        if os.path.exists(name):
-            return ImageFont.truetype(name, size)
-    return ImageFont.load_default()
-
-def draw_text_centered(draw, text, y_center, font, color, img_w):
-    bbox = draw.textbbox((0, 0), text, font=font)
-    tw = bbox[2] - bbox[0]
-    x = (img_w - tw) // 2
-    draw.text((x, y_center - (bbox[3] - bbox[1]) // 2), text, font=font, fill=color)
-    return bbox[3] - bbox[1]   # height
-
-def draw_line_expanding(draw, cx, cy, max_w, alpha, color, thick=4):
-    """Horizontal line expanding from center outward."""
-    w = int(max_w * alpha)
-    if w < 2:
-        return
-    x0, x1 = cx - w // 2, cx + w // 2
-    r, g, b = color
-    a_int = int(alpha * 255)
-    draw.rectangle([x0, cy - thick//2, x1, cy + thick//2],
-                   fill=(r, g, b, a_int))
-
-def draw_corner(draw, x, y, flip_x, flip_y, alpha, color, size=55, thick=3):
-    if alpha <= 0:
-        return
-    r, g, b = color
-    a = int(alpha * 255)
-    dx = -size if flip_x else size
-    dy = -size if flip_y else size
-    dt_x = -thick if flip_x else thick
-    dt_y = -thick if flip_y else thick
-    # horizontal arm
-    x0, x1 = sorted([x, x + dx])
-    y0, y1 = sorted([y, y + dt_y])
-    draw.rectangle([x0, y0, x1, y1], fill=(r, g, b, a))
-    # vertical arm
-    x0, x1 = sorted([x, x + dt_x])
-    y0, y1 = sorted([y, y + dy])
-    draw.rectangle([x0, y0, x1, y1], fill=(r, g, b, a))
-
-# ── SCENE DEFINITIONS ────────────────────────────────────────────────────────
+# ── Scene renderers ───────────────────────────────────────────────────────────
 
 def render_intro(frame):
-    """00 — SIX PILLARS OF FOOTBALL (gold)"""
-    img  = Image.new("RGBA", (W, H), (0, 255, 0, 255))
+    img  = Image.new("RGBA", (W, H), (0, 0, 0, 255))
     draw = ImageDraw.Draw(img, "RGBA")
-
-    gold   = hex_to_rgb("#FFD700")
-    white  = (255, 255, 255)
+    gold = (255, 215, 0)
     cx, cy = W // 2, H // 2
 
-    # ── glow orb (always)
-    orb_r = 300
-    pulse = 0.85 + 0.15 * math.sin(frame / FPS * 2 * math.pi * 0.33)
-    for r in range(int(orb_r * pulse), 0, -6):
-        a = int(55 * (1 - r / (orb_r * pulse)))
-        draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(255, 215, 0, a))
+    # Glass card
+    pop_p = prog(frame, 0.0, 0.40)
+    draw_glass(draw, cx, cy, 840, 540, pop_p, gold)
 
-    # ── lines
-    p_line = ease_out(progress(frame, 0.2, 0.5))
-    draw_line_expanding(draw, cx, cy - 220, 700, p_line, gold)
-    p_line2 = ease_out(progress(frame, 0.3, 0.5))
-    draw_line_expanding(draw, cx, cy + 220, 700, p_line2, gold)
+    fade = clamp(pop_p * 2.2)
 
-    # ── "SIX"
-    p_six = ease_out(progress(frame, 0.05, 0.6))
-    if p_six > 0:
-        fy = int(80 * (1 - p_six))
-        f  = try_font(int(200 * (0.85 + 0.15 * p_six)))
-        c  = blend_color(gold, p_six)
-        bbox = draw.textbbox((0, 0), "SIX", font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        draw.text(((W - tw) // 2, cy - 180 + fy - th // 2), "SIX", font=f, fill=c + (255,))
+    # Thin divider line inside card
+    div_p = ease_out(prog(frame, 0.20, 0.28))
+    if div_p > 0:
+        lw = int(560 * div_p)
+        a  = int(90 * div_p)
+        draw.rectangle([cx - lw//2, cy - 12, cx + lw//2, cy - 9],
+                       fill=(255, 255, 255, a))
 
-    # ── "PILLARS"
-    p_pillars = ease_out(progress(frame, 0.18, 0.6))
-    if p_pillars > 0:
-        fy = int(60 * (1 - p_pillars))
-        f  = try_font(int(118 * (0.9 + 0.1 * p_pillars)))
-        c  = blend_color(white, p_pillars)
-        bbox = draw.textbbox((0, 0), "PILLARS", font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        draw.text(((W - tw) // 2, cy - th // 2 + fy), "PILLARS", font=f, fill=c + (255,))
+    # "SIX"
+    reveal(draw, "SIX",         cx, cy - 135, font(200), gold,        prog(frame, 0.08, 0.35), slide=50)
+    # "PILLARS"
+    reveal(draw, "PILLARS",     cx, cy + 55,  font(122), (255,255,255), prog(frame, 0.20, 0.35), slide=35)
+    # "OF FOOTBALL"
+    reveal(draw, "OF FOOTBALL", cx, cy + 148, font(42),  gold,        prog(frame, 0.32, 0.32), slide=22)
 
-    # ── "OF FOOTBALL"
-    p_sub = ease_out(progress(frame, 0.38, 0.5))
-    if p_sub > 0:
-        fy = int(30 * (1 - p_sub))
-        f  = try_font(46)
-        c  = blend_color(gold, p_sub)
-        bbox = draw.textbbox((0, 0), "OF FOOTBALL", font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        draw.text(((W - tw) // 2, cy + 130 + fy), "OF FOOTBALL", font=f, fill=c + (255,))
-
-    # ── corners
-    p_corn = ease_out(progress(frame, 0.7, 0.4))
-    if p_corn > 0:
-        pad = 120
-        draw_corner(draw, pad,     140,            False, False, p_corn, gold)
-        draw_corner(draw, W - pad, 140,            True,  False, p_corn, gold)
-        draw_corner(draw, pad,     H - 140,        False, True,  p_corn, gold)
-        draw_corner(draw, W - pad, H - 140,        True,  True,  p_corn, gold)
-
-    return img.convert("RGB")
+    return finalize(img)
 
 
 def render_pillar(frame, num, name, color_hex):
-    """Generic pillar card."""
-    img  = Image.new("RGBA", (W, H), (0, 255, 0, 255))
+    img  = Image.new("RGBA", (W, H), (0, 0, 0, 255))
     draw = ImageDraw.Draw(img, "RGBA")
-
-    color = hex_to_rgb(color_hex)
+    acc   = h2r(color_hex)
     white = (255, 255, 255)
+    mid   = (190, 190, 190)
     cx, cy = W // 2, H // 2
 
-    # ── glow orb
-    orb_r = 360
-    pulse = 0.85 + 0.15 * math.sin(frame / FPS * 2 * math.pi * 0.31)
-    for r in range(int(orb_r * pulse), 0, -8):
-        a = int(45 * (1 - r / (orb_r * pulse)))
-        draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=color + (a,))
+    # Auto font size so long names fit
+    name_fs = {
+        "TECHNICAL": 108, "PHYSICAL": 108,
+        "TACTICAL":  122, "HOLISTIC": 116,
+        "HEALTH":    148, "MENTAL":   148,
+    }.get(name, 118)
 
-    # ── lines
-    p_lt = ease_out(progress(frame, 0.15, 0.45))
-    draw_line_expanding(draw, cx, cy - 210, 680, p_lt, color)
-    p_lb = ease_out(progress(frame, 0.25, 0.45))
-    draw_line_expanding(draw, cx, cy + 185, 680, p_lb, color)
+    # Glass card
+    pop_p = prog(frame, 0.0, 0.38)
+    draw_glass(draw, cx, cy, 860, 570, pop_p, acc)
 
-    # ── badge "PILLAR XX"
-    p_badge = ease_out(progress(frame, 0.0, 0.45))
-    if p_badge > 0:
-        fx = int(40 * (1 - p_badge))
-        f  = try_font(44)
-        badge_text = f"PILLAR {num}"
-        c  = blend_color(color, p_badge)
-        bbox = draw.textbbox((0, 0), badge_text, font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        bx = (W - tw) // 2 - fx
-        by = cy - 270
-        draw.text((bx, by), badge_text, font=f, fill=c + (255,))
-        # underline
-        ul_w = int(tw * 0.6)
-        draw.rectangle([bx + (tw - ul_w)//2, by + th + 8,
-                         bx + (tw + ul_w)//2, by + th + 11], fill=c + (255,))
+    # "PILLAR XX" badge
+    p_b = prog(frame, 0.10, 0.30)
+    if p_b > 0:
+        p2 = ease_out(p_b)
+        a  = int(255 * clamp(p_b * 2.5))
+        fx = int(24 * (1 - p2))
+        f  = font(40)
+        txt = f"PILLAR  {num}"
+        tw, th = tsize(draw, txt, f)
+        bx = cx - tw // 2 - fx
+        by = cy - 202
+        r, g, b = acc
+        draw.text((bx, by), txt, font=f, fill=(r, g, b, a))
+        uw = int(tw * 0.52)
+        draw.rectangle([cx - uw//2, by+th+5, cx + uw//2, by+th+8],
+                        fill=(r, g, b, int(a * 0.65)))
 
-    # ── "THE"
-    p_the = ease_out(progress(frame, 0.18, 0.4))
-    if p_the > 0:
-        fy = int(20 * (1 - p_the))
-        f  = try_font(42)
-        c  = (int(255 * p_the),) * 3
-        bbox = draw.textbbox((0, 0), "THE", font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        draw.text(((W - tw) // 2, cy - 160 + fy), "THE", font=f, fill=c + (255,))
+    # Thin divider
+    div_p = ease_out(prog(frame, 0.18, 0.26))
+    if div_p > 0:
+        lw = int(490 * div_p)
+        draw.rectangle([cx - lw//2, cy-148, cx + lw//2, cy-145],
+                       fill=(255, 255, 255, int(60 * div_p)))
 
-    # ── pillar name
-    p_name = ease_out(progress(frame, 0.28, 0.6))
-    if p_name > 0:
-        fy = int(70 * (1 - p_name))
-        fs = int(128 * (0.88 + 0.12 * p_name))
-        f  = try_font(fs)
-        c  = blend_color(white, p_name)
-        bbox = draw.textbbox((0, 0), name, font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        draw.text(((W - tw) // 2, cy - th // 2 + fy - 30), name, font=f, fill=c + (255,))
+    # "THE"
+    reveal(draw, "THE",    cx, cy - 105, font(36),     mid,   prog(frame, 0.18, 0.28), slide=18)
+    # Main name
+    reveal(draw, name,     cx, cy + 8,   font(name_fs),white, prog(frame, 0.26, 0.36), slide=45)
+    # "PILLAR" subtitle
+    reveal(draw, "PILLAR", cx, cy + 148, font(50),     acc,   prog(frame, 0.36, 0.32), slide=25)
 
-    # ── "PILLAR" subtitle
-    p_sub = ease_out(progress(frame, 0.42, 0.5))
-    if p_sub > 0:
-        fy = int(30 * (1 - p_sub))
-        f  = try_font(52)
-        c  = blend_color(color, p_sub)
-        bbox = draw.textbbox((0, 0), "PILLAR", font=f)
-        tw = bbox[2] - bbox[0]; th = bbox[3] - bbox[1]
-        draw.text(((W - tw) // 2, cy + 110 + fy), "PILLAR", font=f, fill=c + (255,))
+    return finalize(img)
 
-    # ── corners
-    p_corn = ease_out(progress(frame, 0.65, 0.35))
-    if p_corn > 0:
-        pad = 110
-        draw_corner(draw, pad,     140,     False, False, p_corn, color)
-        draw_corner(draw, W - pad, 140,     True,  False, p_corn, color)
-        draw_corner(draw, pad,     H - 140, False, True,  p_corn, color)
-        draw_corner(draw, W - pad, H - 140, True,  True,  p_corn, color)
-
-    return img.convert("RGB")
-
-
-# ── SCENES LIST ───────────────────────────────────────────────────────────────
+# ── Scenes ────────────────────────────────────────────────────────────────────
 
 SCENES = [
-    ("00_six_pillars_intro",  None,   None,       None),
-    ("01_technical_pillar",   "01",   "TECHNICAL", "#00C2FF"),
-    ("02_tactical_pillar",    "02",   "TACTICAL",  "#FF6B35"),
-    ("03_health_pillar",      "03",   "HEALTH",    "#39D353"),
-    ("04_physical_pillar",    "04",   "PHYSICAL",  "#FF2D55"),
-    ("05_mental_pillar",      "05",   "MENTAL",    "#BF5AF2"),
-    ("06_holistic_pillar",    "06",   "HOLISTIC",  "#FFD700"),
+    ("00_six_pillars_intro", None, None,        None),
+    ("01_technical_pillar",  "01", "TECHNICAL", "#00C2FF"),
+    ("02_tactical_pillar",   "02", "TACTICAL",  "#FF6B35"),
+    ("03_health_pillar",     "03", "HEALTH",    "#39D353"),
+    ("04_physical_pillar",   "04", "PHYSICAL",  "#FF2D55"),
+    ("05_mental_pillar",     "05", "MENTAL",    "#BF5AF2"),
+    ("06_holistic_pillar",   "06", "HOLISTIC",  "#FFD700"),
 ]
 
-# ── RENDER ────────────────────────────────────────────────────────────────────
+# ── Render ────────────────────────────────────────────────────────────────────
 
 for slug, num, name, color in SCENES:
-    print(f"Rendering {slug}...")
+    print(f"Rendering {slug}...", flush=True)
     fd = os.path.join(FRAME_DIR, slug)
     os.makedirs(fd, exist_ok=True)
 
     for f in range(FRAMES):
-        if slug == "00_six_pillars_intro":
-            img = render_intro(f)
-        else:
-            img = render_pillar(f, num, name, color)
+        img = render_intro(f) if not num else render_pillar(f, num, name, color)
         img.save(os.path.join(fd, f"frame_{f:04d}.png"))
 
     out = os.path.join(OUT_DIR, f"{slug}.mov")
-    cmd = [
+    subprocess.run([
         "ffmpeg", "-y",
         "-framerate", str(FPS),
         "-i", os.path.join(fd, "frame_%04d.png"),
-        "-c:v", "libx264",
-        "-pix_fmt", "yuv420p",
-        "-preset", "fast",
-        "-crf", "18",
+        "-c:v", "libx264", "-pix_fmt", "yuv420p",
+        "-preset", "fast", "-crf", "16",
         out
-    ]
-    subprocess.run(cmd, capture_output=True)
-    shutil.rmtree(fd)   # clean up frames
-    print(f"  → {out}")
+    ], capture_output=True)
+    shutil.rmtree(fd)
+    print(f"  → {out}  ({os.path.getsize(out)/1e6:.1f} MB)", flush=True)
 
-print("\nDone! All videos in:", OUT_DIR)
+print("\nDone. DaVinci Resolve: clip above footage → Composite Mode → SCREEN")
