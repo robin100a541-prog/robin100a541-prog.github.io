@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-FLOW STATE — Brain Neural Visualization
-1920×1080 · 30fps · 8s · YouTube 16:9
-No text. Pure visual. Brain silhouette + neural flows + particles.
+FLOW STATE — Premium Brain Neural Visualization v2
+1920×1080 · 30fps · 10s · YouTube 16:9
 
-Narrative arc:
-  0-2s  → Brain appears, neural chaos (overthinking — fast erratic flashes)
-  2-4s  → Chaos slows, pathways start to glow, particles find streams
-  4-8s  → Full FLOW — smooth synchronized streams, brain breathing with light
+Color arc:
+  0–1.5s  → fade-in, brain materialises from void
+  1.5–3s  → crimson/orange chaos (overthinking storm)
+  3–5.5s  → electric-purple transition (mind slowing)
+  5.5–10s → gold nodes + cyan streams (full flow state)
 """
 
 import numpy as np
@@ -16,11 +16,10 @@ import subprocess, os, shutil, math
 
 W, H   = 1920, 1080
 FPS    = 30
-DUR    = 8.0
-FRAMES = int(DUR * FPS)   # 240
+DUR    = 10.0
+FRAMES = int(DUR * FPS)   # 300
 CX, CY = W // 2, H // 2
-BRX    = 340    # brain x-radius
-BRY    = 272    # brain y-radius
+BRX, BRY = 390, 308
 
 OUT_DIR   = "/home/user/robin-/motion-graphics/flow_brain"
 FRAME_DIR = os.path.join(OUT_DIR, "_frames")
@@ -28,61 +27,69 @@ os.makedirs(FRAME_DIR, exist_ok=True)
 
 rng = np.random.default_rng(42)
 
-# ── Colour helpers ────────────────────────────────────────────────────────────
-def lerp_col(a, b, t):
-    t = max(0.0, min(1.0, t))
-    return tuple(int(a[i]*(1-t) + b[i]*t) for i in range(3))
-
+# ── Helpers ───────────────────────────────────────────────────────────────────
 def clamp(v, lo=0.0, hi=1.0): return max(lo, min(hi, v))
 def ease_in_out(t): t=clamp(t); return t*t*(3-2*t)
-def ease_out(t): t=clamp(t); return 1-(1-t)**3
+def ease_out(t):    t=clamp(t); return 1-(1-t)**3
+def lerp(a, b, t):  return a*(1-clamp(t)) + b*clamp(t)
+def lerp_col(a, b, t):
+    t = clamp(t)
+    return tuple(int(a[i]*(1-t) + b[i]*t) for i in range(3))
 
-# ── Brain silhouette polygon ──────────────────────────────────────────────────
-def brain_polygon(cx, cy, n=400):
+# ── Premium colour palette ────────────────────────────────────────────────────
+BG           = (2,  3,  12)
+CHAOS_COL    = (255,  55,  30)    # deep crimson-orange
+TRANS_COL    = (160,  40, 255)    # electric purple
+FLOW_COL     = (  0, 210, 255)    # electric cyan
+GOLD_COL     = (255, 200,  50)    # synaptic gold
+WHITE        = (255, 255, 255)
+
+# ── Brain silhouette ──────────────────────────────────────────────────────────
+def brain_polygon(cx, cy, rx, ry, n=600):
     pts = []
     for i in range(n):
         theta = 2*math.pi*i/n
-        # Organic base with gyri bumps
         r  = 1.0
-        r += 0.070 * math.sin(5 * theta + 0.2)
-        r += 0.045 * math.sin(9 * theta + 1.1)
-        r += 0.025 * math.sin(14* theta + 2.3)
-        r += 0.015 * math.sin(20* theta + 0.7)
-        # Flatten bottom (brainstem area)
-        flat = 1.0 - 0.12 * max(0, -math.sin(theta))**1.5
-        # Slight left-right asymmetry (realistic)
-        asym = 1.0 + 0.02 * math.cos(theta)
-        pts.append((cx + BRX * r * flat * asym * math.cos(theta),
-                    cy + BRY * r * flat * math.sin(theta)))
+        r += 0.085 * math.sin(5  * theta + 0.20)
+        r += 0.055 * math.sin(9  * theta + 1.10)
+        r += 0.032 * math.sin(14 * theta + 2.30)
+        r += 0.018 * math.sin(20 * theta + 0.70)
+        r += 0.010 * math.sin(28 * theta + 1.90)
+        flat = 1.0 - 0.14 * max(0, -math.sin(theta))**1.5
+        asym = 1.0 + 0.025 * math.cos(theta)
+        pts.append((cx + rx * r * flat * asym * math.cos(theta),
+                    cy + ry * r * flat *          math.sin(theta)))
     return pts
 
-BRAIN_PTS = brain_polygon(CX, CY)
+BRAIN_PTS = brain_polygon(CX, CY, BRX, BRY)
 
-# ── Neural pathway waypoints (screen coords) ──────────────────────────────────
-def npt(dx, dy): return (CX + dx, CY + dy)
+# ── Neural pathways ───────────────────────────────────────────────────────────
+def npt(dx, dy): return (CX+dx, CY+dy)
 
 RAW_PATHS = [
-    # Left hemisphere — major gyri arcs
-    [npt(-20,-10), npt(-100,-120), npt(-200,-160), npt(-295,-110), npt(-330,-20)],
-    [npt(-20,-10), npt(-130, -60), npt(-255, -55), npt(-320, 30)],
-    [npt(-20,-10), npt(-115,  50), npt(-240,  80), npt(-310, 60)],
-    [npt(-20,-10), npt( -90,-140), npt(-160,-200), npt(-230,-190)],
-    [npt(-20,-10), npt(-180, -90), npt(-280,-150)],
-    [npt(-20,-10), npt(-160,  30), npt(-280,  10)],
+    # Left hemisphere
+    [npt(-20,-10), npt(-85,-95), npt(-160,-148), npt(-238,-158), npt(-300,-112), npt(-335,-22)],
+    [npt(-20,-10), npt(-95,-52), npt(-178,-72),  npt(-258,-58),  npt(-322, 28)],
+    [npt(-20,-10), npt(-88, 38), npt(-178, 72),  npt(-245, 82),  npt(-312, 62)],
+    [npt(-20,-10), npt(-72,-105),npt(-138,-168), npt(-205,-198), npt(-245,-188)],
+    [npt(-20,-10), npt(-125,-82),npt(-218,-125), npt(-288,-148)],
+    [npt(-20,-10), npt(-115, 28),npt(-218,  32), npt(-288,  18)],
+    [npt(-20,-10), npt(-65,  82),npt(-148, 132), npt(-235, 122), npt(-298,  82)],
     # Right hemisphere
-    [npt( 20,-10), npt( 100,-120), npt( 200,-160), npt( 295,-110), npt( 330,-20)],
-    [npt( 20,-10), npt( 130, -60), npt( 255, -55), npt( 320, 30)],
-    [npt( 20,-10), npt( 115,  50), npt( 240,  80), npt( 310, 60)],
-    [npt( 20,-10), npt(  90,-140), npt( 160,-200), npt( 230,-190)],
-    [npt( 20,-10), npt( 180, -90), npt( 280,-150)],
-    [npt( 20,-10), npt( 160,  30), npt( 280,  10)],
-    # Corpus callosum (cross-hemisphere)
-    [npt(-240,-80), npt(-120,-30), npt(0,-15), npt(120,-30), npt(240,-80)],
-    [npt(-220, 60), npt(-110, 30), npt(0, 20), npt(110, 30), npt(220, 60)],
+    [npt( 20,-10), npt( 85,-95), npt( 160,-148), npt( 238,-158), npt( 300,-112), npt( 335,-22)],
+    [npt( 20,-10), npt( 95,-52), npt( 178,-72),  npt( 258,-58),  npt( 322, 28)],
+    [npt( 20,-10), npt( 88, 38), npt( 178, 72),  npt( 245, 82),  npt( 312, 62)],
+    [npt( 20,-10), npt( 72,-105),npt( 138,-168), npt( 205,-198), npt( 245,-188)],
+    [npt( 20,-10), npt( 125,-82),npt( 218,-125), npt( 288,-148)],
+    [npt( 20,-10), npt( 115, 28),npt( 218,  32), npt( 288,  18)],
+    [npt( 20,-10), npt(  65, 82),npt( 148, 132), npt( 235, 122), npt( 298,  82)],
+    # Corpus callosum cross-connections
+    [npt(-242,-82), npt(-122,-38), npt(0,-18), npt( 122,-38), npt( 242,-82)],
+    [npt(-222, 62), npt(-112, 32), npt(0, 22), npt( 112, 32), npt( 222, 62)],
+    [npt(-185,-152),npt( -88,-112), npt(0,-92), npt(  88,-112), npt( 185,-152)],
 ]
 
-def interpolate_path(waypts, n=120):
-    """Linear interpolation along waypoints → list of (x,y) at n steps."""
+def interpolate_path(waypts, n=180):
     if len(waypts) < 2: return waypts
     segs    = len(waypts) - 1
     pts_per = max(2, n // segs)
@@ -90,199 +97,307 @@ def interpolate_path(waypts, n=120):
     for i in range(segs):
         p0, p1 = waypts[i], waypts[i+1]
         for k in range(pts_per):
-            t = k / pts_per
-            out.append((p0[0]*(1-t)+p1[0]*t, p0[1]*(1-t)+p1[1]*t))
+            tt = k / pts_per
+            out.append((p0[0]*(1-tt)+p1[0]*tt, p0[1]*(1-tt)+p1[1]*tt))
     out.append(waypts[-1])
     return out
 
-PATHS_DENSE = [interpolate_path(p, 140) for p in RAW_PATHS]
+PATHS_DENSE = [interpolate_path(p, 180) for p in RAW_PATHS]
 N_PATHS     = len(PATHS_DENSE)
+NODES       = list({tuple(p[0]) for p in RAW_PATHS} | {tuple(p[-1]) for p in RAW_PATHS})
 
-# All path points for spatial reference
-ALL_PATH_PTS = np.array([(x,y) for p in PATHS_DENSE for x,y in p])
+# ── Particles ─────────────────────────────────────────────────────────────────
+N_PART   = 900
+TAIL_LEN = 14
 
-# ── Node positions (path endpoints + intersections) ──────────────────────────
-NODES = list({tuple(p[0]) for p in RAW_PATHS} |
-             {tuple(p[-1]) for p in RAW_PATHS})
-
-# ── Particle system ───────────────────────────────────────────────────────────
-N_PART    = 600
-# Start: random positions scattered inside brain bbox
 px = rng.uniform(CX - BRX*0.85, CX + BRX*0.85, N_PART)
 py = rng.uniform(CY - BRY*0.85, CY + BRY*0.85, N_PART)
-# Random velocities for chaos phase
-vx = rng.uniform(-6, 6, N_PART)
-vy = rng.uniform(-6, 6, N_PART)
+vx = rng.uniform(-7, 7, N_PART)
+vy = rng.uniform(-7, 7, N_PART)
 
-# Target positions: distribute along paths for flow phase
-path_targets = []
-for _ in range(N_PART):
-    pi   = rng.integers(0, N_PATHS)
-    idx  = rng.integers(0, len(PATHS_DENSE[pi]))
-    pt   = PATHS_DENSE[pi][idx]
-    # Assign a slightly randomised phase offset for visual variety
-    path_targets.append(pt)
-path_targets = np.array(path_targets)
+part_path_idx = rng.integers(0, N_PATHS, N_PART)
+part_path_pos = rng.uniform(0, 1, N_PART)
+part_path_spd = rng.uniform(0.004, 0.012, N_PART)
+part_size     = rng.uniform(0.8, 2.8, N_PART)
 
-# Flow path offsets (each particle advances along a path)
-part_path_idx  = rng.integers(0, N_PATHS, N_PART)
-part_path_pos  = rng.uniform(0, 1, N_PART)   # 0→1 position along path
-part_path_spd  = rng.uniform(0.003, 0.009, N_PART)   # speed
+path_targets = np.zeros((N_PART, 2))
+for i in range(N_PART):
+    pi  = part_path_idx[i]
+    idx = int(part_path_pos[i] * (len(PATHS_DENSE[pi])-1))
+    path_targets[i] = PATHS_DENSE[pi][idx]
 
-# ── Precompute static brain base ───────────────────────────────────────────────
-print("Precomputing brain base layer...", flush=True)
+px_hist = np.tile(px, (TAIL_LEN, 1)).copy()
+py_hist = np.tile(py, (TAIL_LEN, 1)).copy()
+
+# Energy ring emission times (flow phase)
+RING_TIMES = [5.5, 6.4, 7.3, 8.2, 9.1]
+
+# ── Precompute brain base (static) ────────────────────────────────────────────
+print("Precomputing premium brain base...", flush=True)
 
 def make_brain_base():
-    base = Image.new("RGBA", (W, H), (3, 5, 14, 255))
+    base = Image.new("RGBA", (W, H), (*BG, 255))
 
-    # Subtle radial background vignette
-    bg_layer = Image.new("RGBA", (W, H), (0,0,0,0))
-    bg_d = ImageDraw.Draw(bg_layer)
-    for r in range(550, 0, -10):
-        a = int(25 * (1 - r/550)**1.5)
-        bg_d.ellipse([CX-r*1.8, CY-r, CX+r*1.8, CY+r], fill=(20, 35, 90, a))
-    base = Image.alpha_composite(base, bg_layer)
+    # Deep cosmic background — layered purple nebula
+    cosmic = Image.new("RGBA", (W, H), (0,0,0,0))
+    cd     = ImageDraw.Draw(cosmic)
+    nebula_specs = [
+        (1000, 600, ( 55,  0, 110), 0.22),
+        ( 720, 432, ( 35, 10,  95), 0.28),
+        ( 500, 300, ( 18, 18,  85), 0.32),
+        ( 340, 204, (  8, 25,  75), 0.25),
+        ( 200, 120, (  4, 35,  65), 0.18),
+    ]
+    for rx, ry, col, a_mult in nebula_specs:
+        for s in range(6, 0, -1):
+            frac = s / 6
+            a = int(255 * a_mult * frac)
+            cd.ellipse([CX-int(rx*frac*1.75), CY-int(ry*frac),
+                        CX+int(rx*frac*1.75), CY+int(ry*frac)],
+                       fill=(*col, a))
+    cosmic = cosmic.filter(ImageFilter.GaussianBlur(radius=90))
+    base   = Image.alpha_composite(base, cosmic)
+
+    # Ambient star dust
+    star_l = Image.new("RGBA", (W, H), (0,0,0,0))
+    sd     = ImageDraw.Draw(star_l)
+    srng   = np.random.default_rng(77)
+    sx = srng.uniform(0, W, 280).astype(int)
+    sy = srng.uniform(0, H, 280).astype(int)
+    sa = srng.integers(15, 65, 280)
+    sr = srng.uniform(0.4, 1.6, 280)
+    for i in range(280):
+        r = sr[i]
+        sd.ellipse([sx[i]-r, sy[i]-r, sx[i]+r, sy[i]+r],
+                   fill=(160, 190, 255, int(sa[i])))
+    base = Image.alpha_composite(base, star_l)
 
     pts_i = [(int(x), int(y)) for x,y in BRAIN_PTS]
 
-    # Multi-layer glow (wide → tight)
-    for glow_r, col, a_mult in [
-        (55, (30, 80, 255),  0.12),
-        (35, (50, 120, 255), 0.20),
-        (18, (80, 160, 255), 0.35),
-        ( 8, (120,190,255),  0.60),
-    ]:
+    # Multi-layer premium brain glow (7 layers: purple→blue→cyan)
+    glow_specs = [
+        (90, ( 65,  0, 130), 0.09),
+        (70, ( 45, 15, 165), 0.13),
+        (52, ( 22, 55, 215), 0.17),
+        (38, ( 10,115, 255), 0.22),
+        (24, (  0,165, 255), 0.30),
+        (14, (  0,205, 255), 0.42),
+        ( 6, (140,235, 255), 0.58),
+    ]
+    for gr, col, am in glow_specs:
         gl = Image.new("RGBA", (W, H), (0,0,0,0))
         gd = ImageDraw.Draw(gl)
-        gd.polygon(pts_i, outline=(*col, int(255*a_mult)), fill=None)
-        gl = gl.filter(ImageFilter.GaussianBlur(radius=glow_r))
+        gd.polygon(pts_i, outline=(*col, int(255*am)), fill=None)
+        gl = gl.filter(ImageFilter.GaussianBlur(radius=gr))
         base = Image.alpha_composite(base, gl)
 
-    # Crisp brain outline
+    # Crisp brain outline — triple pass
     out_l = Image.new("RGBA", (W, H), (0,0,0,0))
     od    = ImageDraw.Draw(out_l)
-    od.polygon(pts_i, outline=(160, 210, 255, 220), fill=None)
-    base  = Image.alpha_composite(base, out_l)
+    od.polygon(pts_i, outline=(0,  170, 255,  70), fill=None)  # soft halo
+    od.polygon(pts_i, outline=(90, 200, 255, 200), fill=None)  # main
+    od.polygon(pts_i, outline=(220,245, 255, 140), fill=None)  # bright core
+    base = Image.alpha_composite(base, out_l)
 
-    # Very subtle fill (slight interior glow)
+    # Subtle interior fill
     fill_l = Image.new("RGBA", (W, H), (0,0,0,0))
     fd     = ImageDraw.Draw(fill_l)
-    fd.polygon(pts_i, fill=(15, 30, 80, 22))
+    fd.polygon(pts_i, fill=(6, 18, 55, 20))
     base   = Image.alpha_composite(base, fill_l)
 
-    # Hemisphere dividing line (corpus callosum guide)
+    # Gyri / sulci texture arcs
+    gyri_l = Image.new("RGBA", (W, H), (0,0,0,0))
+    gyd    = ImageDraw.Draw(gyri_l)
+    for acx, acy, arx, ary, a0, a1 in [
+        (CX-145, CY-65,  148, 95,  195, 345),
+        (CX-125, CY+45,  105, 65,  188, 358),
+        (CX-185, CY-105,  95, 65,  215, 332),
+        (CX- 82, CY-128, 115, 72,  198, 352),
+        (CX+145, CY-65,  148, 95,  195, 345),
+        (CX+125, CY+45,  105, 65,  188, 358),
+        (CX+185, CY-105,  95, 65,  215, 332),
+        (CX+ 82, CY-128, 115, 72,  198, 352),
+    ]:
+        gyd.arc([acx-arx, acy-ary, acx+arx, acy+ary], a0, a1,
+                fill=(45, 95, 195, 20), width=1)
+    gyri_l = gyri_l.filter(ImageFilter.GaussianBlur(radius=1.8))
+    base   = Image.alpha_composite(base, gyri_l)
+
+    # Hemisphere divider
     div_l = Image.new("RGBA", (W, H), (0,0,0,0))
     dd    = ImageDraw.Draw(div_l)
-    for dy in range(-BRY+40, BRY-40, 4):
-        dd.ellipse([CX-3, CY+dy-3, CX+3, CY+dy+3],
-                   fill=(100, 160, 255, 35))
-    div_l = div_l.filter(ImageFilter.GaussianBlur(radius=4))
+    for dy in range(-BRY+55, BRY-55, 3):
+        dd.ellipse([CX-2, CY+dy-2, CX+2, CY+dy+2], fill=(75, 135, 255, 26))
+    div_l = div_l.filter(ImageFilter.GaussianBlur(radius=3))
     base  = Image.alpha_composite(base, div_l)
 
-    # Dim neural path lines (static skeleton)
+    # Dim path skeleton
     path_l = Image.new("RGBA", (W, H), (0,0,0,0))
     pd     = ImageDraw.Draw(path_l)
     for path in PATHS_DENSE:
         pts2 = [(int(x), int(y)) for x,y in path]
         if len(pts2) > 1:
-            pd.line(pts2, fill=(30, 70, 160, 60), width=1)
+            pd.line(pts2, fill=(18, 52, 135, 48), width=1)
     path_l = path_l.filter(ImageFilter.GaussianBlur(radius=1))
     base   = Image.alpha_composite(base, path_l)
+
+    # Cinematic vignette (precomputed with NumPy)
+    yy, xx = np.mgrid[0:H, 0:W]
+    nx_v   = (xx - W/2) / (W/2)
+    ny_v   = (yy - H/2) / (H/2)
+    dist   = np.sqrt(nx_v**2 * 0.7 + ny_v**2)    # wider horizontally
+    v_a    = np.clip((dist - 0.52) / 0.48, 0, 1)**1.8
+    vig_arr         = np.zeros((H, W, 4), dtype=np.uint8)
+    vig_arr[:,:, 3] = (v_a * 195).astype(np.uint8)
+    VIG = Image.fromarray(vig_arr, 'RGBA')
+    base = Image.alpha_composite(base, VIG)
 
     return base
 
 BRAIN_BASE = make_brain_base()
-print("  Brain base done.", flush=True)
+print("  Done.", flush=True)
 
 # ── Per-frame render ──────────────────────────────────────────────────────────
-def render(frame, px, py, vx, vy, part_path_pos):
+def render(frame, cur_px, cur_py, px_hist, py_hist):
     t    = frame / FPS
-    # Phase blend: 0=chaos, 1=flow
-    flow = ease_in_out(clamp((t - 1.5) / 2.5))   # ramps 1.5s→4s
+    # flow 0→1 over 1.5s→5.0s
+    flow = ease_in_out(clamp((t - 1.5) / 3.5))
 
-    img  = BRAIN_BASE.copy()
+    img = BRAIN_BASE.copy()
 
-    # ── Neural pathway pulses ─────────────────────────────────────────────────
-    pulse_layer = Image.new("RGBA", (W, H), (0,0,0,0))
-    pd = ImageDraw.Draw(pulse_layer)
+    # ── 1. Neural path streaks ────────────────────────────────────────────
+    streak_l = Image.new("RGBA", (W, H), (0,0,0,0))
+    sd       = ImageDraw.Draw(streak_l)
+    STREAK   = 28
 
     for pi, path in enumerate(PATHS_DENSE):
-        # Each path has a travelling pulse
-        phase_off = pi * 0.23 + 0.7
-        # In chaos: pulse moves fast + jitters; in flow: slow + smooth
-        speed_chaos = 0.8 + 0.4 * math.sin(pi * 1.7)
-        speed_flow  = 0.25 + 0.15 * math.sin(pi * 2.1)
-        speed       = speed_chaos*(1-flow) + speed_flow*flow
-        pulse_t     = (t * speed + phase_off) % 1.0
+        off   = pi * 0.32 + 0.55
+        spd   = lerp(0.85 + 0.45*math.sin(pi*1.7), 0.28 + 0.10*math.sin(pi*2.1), flow)
+        n_pul = 2 if flow < 0.4 else 1
 
-        # In chaos phase, also fire random sparks
-        n_pulses = 3 if flow < 0.5 else 1
-        for k in range(n_pulses):
-            pt_off = (pulse_t + k/n_pulses) % 1.0
-            idx    = int(pt_off * (len(path)-1))
-            px_p, py_p = path[idx]
+        for k in range(n_pul):
+            pulse_t  = (t * spd + off + k/n_pul) % 1.0
+            head_idx = int(pulse_t * (len(path)-1))
 
-            # Color: white-ish in chaos → cyan in flow
-            col = lerp_col((220, 230, 255), (0, 210, 255), flow)
-            # Brightness flickers in chaos phase
-            flicker = 1.0 if flow > 0.6 else (0.5 + 0.5*math.sin(t*40+pi*3.1))
-            a       = int(200 * flicker * (0.4 + 0.6*flow))
+            if flow < 0.42:
+                col_h = lerp_col(CHAOS_COL, TRANS_COL, flow/0.42)
+            else:
+                col_h = lerp_col(TRANS_COL, FLOW_COL, (flow-0.42)/0.58)
 
-            r_pulse = int(lerp_col((2,2,2),(4,4,4),flow)[0])  # tight glow
-            pd.ellipse([px_p-r_pulse, py_p-r_pulse, px_p+r_pulse, py_p+r_pulse],
-                       fill=(*col, a))
+            flicker = 1.0 if flow > 0.55 else max(0.25, abs(math.sin(t*28+pi*3.1+k*1.7)))
 
-    pulse_layer = pulse_layer.filter(ImageFilter.GaussianBlur(radius=4))
-    img = Image.alpha_composite(img, pulse_layer)
+            for s in range(min(STREAK, head_idx)):
+                idx       = head_idx - s
+                px_s, py_s = path[idx]
+                frac      = (1 - s/STREAK)**2
+                a         = int(240 * frac * flicker)
+                w         = max(1, int(3.5 * frac))
+                sd.ellipse([px_s-w, py_s-w, px_s+w, py_s+w], fill=(*col_h, a))
 
-    # ── Node pulses ────────────────────────────────────────────────────────────
-    node_layer = Image.new("RGBA", (W, H), (0,0,0,0))
-    nd = ImageDraw.Draw(node_layer)
+    streak_l = streak_l.filter(ImageFilter.GaussianBlur(radius=3.5))
+    img      = Image.alpha_composite(img, streak_l)
+
+    # ── 2. Synaptic nodes (gold in flow, red-flash in chaos) ──────────────
+    node_l = Image.new("RGBA", (W, H), (0,0,0,0))
+    nd     = ImageDraw.Draw(node_l)
     for ni, (nx, ny) in enumerate(NODES):
-        pulse = 0.5 + 0.5*math.sin(t * (2.5 + ni*0.4))
-        chaos_bright = 0.4 + 0.6*(1-flow) * abs(math.sin(t*8+ni*2))
-        a_node = int(120 * pulse * (0.3 + 0.7*flow) + 80 * chaos_bright)
-        col_n  = lerp_col((255, 255, 255), (0, 200, 255), flow)
-        nd.ellipse([nx-4, ny-4, nx+4, ny+4], fill=(*col_n, min(255, a_node)))
-    node_layer = node_layer.filter(ImageFilter.GaussianBlur(radius=3))
-    img = Image.alpha_composite(img, node_layer)
+        pulse = 0.5 + 0.5*math.sin(t*(2.0+ni*0.38) + ni*1.12)
+        if flow < 0.38:
+            flash = abs(math.sin(t*13+ni*2.8))
+            col_n = lerp_col(CHAOS_COL, WHITE, flash * 0.6)
+            a_n   = int(200 * flash)
+        else:
+            gold_t = clamp((flow-0.38)/0.62)
+            col_n  = lerp_col(WHITE, GOLD_COL, gold_t)
+            a_n    = int(145 * pulse)
+        r_out = int(9 + 6*pulse*flow)
+        nd.ellipse([nx-r_out, ny-r_out, nx+r_out, ny+r_out],
+                   fill=(*col_n, int(a_n*0.38)))
+        nd.ellipse([nx-4, ny-4, nx+4, ny+4],
+                   fill=(*col_n, min(255, a_n)))
 
-    # ── Particles ──────────────────────────────────────────────────────────────
-    p_layer = Image.new("RGBA", (W, H), (0,0,0,0))
-    pdd = ImageDraw.Draw(p_layer)
+    node_l = node_l.filter(ImageFilter.GaussianBlur(radius=4))
+    img    = Image.alpha_composite(img, node_l)
 
+    # ── 3. Particles with comet tails ────────────────────────────────────
+    p_l  = Image.new("RGBA", (W, H), (0,0,0,0))
+    pdd  = ImageDraw.Draw(p_l)
+
+    if flow < 0.5:
+        col_p = lerp_col(CHAOS_COL, TRANS_COL, flow*2)
+    else:
+        col_p = lerp_col(TRANS_COL, FLOW_COL, (flow-0.5)*2)
+
+    # Tail layers: oldest → newest
+    for tail_i in range(TAIL_LEN-1, -1, -1):
+        tf    = (TAIL_LEN - tail_i) / TAIL_LEN
+        t_a   = int(175 * tf**2.0 * (0.28 + 0.72*flow))
+        t_sz  = max(1, round(2.2 * tf))
+        if t_a < 5: continue
+
+        tx_arr = px_hist[tail_i]*(1-flow) + path_targets[:,0]*flow
+        ty_arr = py_hist[tail_i]*(1-flow) + path_targets[:,1]*flow
+
+        for i in range(N_PART):
+            tx, ty = float(tx_arr[i]), float(ty_arr[i])
+            if 8 < tx < W-8 and 8 < ty < H-8:
+                pdd.ellipse([tx-t_sz, ty-t_sz, tx+t_sz, ty+t_sz],
+                            fill=(*col_p, t_a))
+
+    # Head
+    cx_arr  = cur_px*(1-flow) + path_targets[:,0]*flow
+    cy_arr  = cur_py*(1-flow) + path_targets[:,1]*flow
+    head_col = lerp_col(col_p, WHITE, flow*0.55)
+    head_a   = int(235 * (0.38 + 0.62*flow))
     for i in range(N_PART):
-        # Chaos: use random-walk px/py; Flow: follow path
-        fx = float(px[i])*(1-flow) + float(path_targets[i,0])*flow
-        fy = float(py[i])*(1-flow) + float(path_targets[i,1])*flow
+        cx_i, cy_i = float(cx_arr[i]), float(cy_arr[i])
+        sz = max(1, round(part_size[i] * (0.7 + 0.5*flow)))
+        if 8 < cx_i < W-8 and 8 < cy_i < H-8:
+            pdd.ellipse([cx_i-sz, cy_i-sz, cx_i+sz, cy_i+sz],
+                        fill=(*head_col, head_a))
 
-        if not (50 < fx < W-50 and 50 < fy < H-50):
-            continue
+    p_l = p_l.filter(ImageFilter.GaussianBlur(radius=1.8))
+    img = Image.alpha_composite(img, p_l)
 
-        col_p = lerp_col((255, 250, 255), (0, 200, 255), flow)
-        # Smaller in flow (more precise), jittery in chaos
-        sz  = 2 if flow > 0.5 else int(1 + 2*abs(math.sin(t*15+i*0.1)))
-        a_p = int(180 * (0.5 + 0.5*flow))
-        pdd.ellipse([fx-sz, fy-sz, fx+sz, fy+sz], fill=(*col_p, a_p))
+    # ── 4. Energy rings (flow reveal) ─────────────────────────────────────
+    if flow > 0.45:
+        ring_l = Image.new("RGBA", (W, H), (0,0,0,0))
+        rd     = ImageDraw.Draw(ring_l)
+        for rt in RING_TIMES:
+            since = t - rt
+            if 0 <= since <= 2.2:
+                prog  = since / 2.2
+                rad   = int(prog * 520)
+                alpha = int(140 * (1-prog)**2 * flow)
+                if alpha > 3 and rad > 6:
+                    rd.ellipse([CX-rad, CY-rad, CX+rad, CY+rad],
+                               outline=(*FLOW_COL, alpha), width=2)
+                    r2 = max(1, rad-12)
+                    rd.ellipse([CX-r2, CY-r2, CX+r2, CY+r2],
+                               outline=(255, 255, 255, int(alpha*0.35)), width=1)
+        ring_l = ring_l.filter(ImageFilter.GaussianBlur(radius=4.5))
+        img    = Image.alpha_composite(img, ring_l)
 
-    p_layer = p_layer.filter(ImageFilter.GaussianBlur(radius=2))
-    img = Image.alpha_composite(img, p_layer)
-
-    # ── Brain-wide energy pulse during flow (periodic breathing glow) ──────────
-    if flow > 0.3:
-        breath   = 0.5 + 0.5*math.sin(t * 1.6)
-        glow_val = int(40 * (flow - 0.3) / 0.7 * breath)
-        if glow_val > 2:
-            breath_l = Image.new("RGBA", (W, H), (0,0,0,0))
-            bd = ImageDraw.Draw(breath_l)
+    # ── 5. Brain breathing glow (pulsing interior light) ──────────────────
+    if flow > 0.28:
+        breath   = 0.5 + 0.5*math.sin(t * 1.35)
+        glow_val = int(68 * (flow-0.28)/0.72 * breath)
+        if glow_val > 3:
+            bl   = Image.new("RGBA", (W, H), (0,0,0,0))
+            bd   = ImageDraw.Draw(bl)
             pts_i = [(int(x), int(y)) for x,y in BRAIN_PTS]
-            bd.polygon(pts_i, fill=(0, 150, 255, glow_val))
-            breath_l = breath_l.filter(ImageFilter.GaussianBlur(radius=30))
-            img = Image.alpha_composite(img, breath_l)
+            bd.polygon(pts_i, fill=(0, 145, 255, glow_val))
+            bl   = bl.filter(ImageFilter.GaussianBlur(radius=38))
+            img  = Image.alpha_composite(img, bl)
 
-    # ── Fade-in at start ───────────────────────────────────────────────────────
-    if t < 1.0:
-        black = Image.new("RGBA", (W, H), (0,0,0,int(255*(1-t))))
+    # ── 6. Fade in / fade out ─────────────────────────────────────────────
+    if t < 1.4:
+        fade = (1 - t/1.4)**1.6
+        black = Image.new("RGBA", (W, H), (0,0,0,int(255*fade)))
+        img   = Image.alpha_composite(img, black)
+    if t > 9.2:
+        fade  = (t - 9.2) / 0.8
+        black = Image.new("RGBA", (W, H), (0,0,0,int(255*clamp(fade))))
         img   = Image.alpha_composite(img, black)
 
     return img.convert("RGB"), flow
@@ -290,62 +405,57 @@ def render(frame, px, py, vx, vy, part_path_pos):
 # ── Main render loop ──────────────────────────────────────────────────────────
 print(f"Rendering {FRAMES} frames...", flush=True)
 
-cur_px = px.copy()
-cur_py = py.copy()
-cur_vx = vx.copy()
-cur_vy = vy.copy()
-cur_pos = part_path_pos.copy()
+cur_px = px.copy();  cur_py = py.copy()
+cur_vx = vx.copy();  cur_vy = vy.copy()
 
 for f in range(FRAMES):
     t    = f / FPS
-    flow = ease_in_out(clamp((t - 1.5) / 2.5))
+    flow = ease_in_out(clamp((t - 1.5) / 3.5))
 
-    # Update particle positions
-    # Chaos phase: random walk, bouncing inside brain region
-    chaos_scale = 1.0 - flow
-    if chaos_scale > 0.01:
-        cur_px += cur_vx * chaos_scale
-        cur_py += cur_vy * chaos_scale
-        # Add jitter in chaos
-        cur_vx += rng.uniform(-1.5, 1.5, N_PART) * chaos_scale
-        cur_vy += rng.uniform(-1.5, 1.5, N_PART) * chaos_scale
-        # Contain within brain area
-        cur_vx = np.clip(cur_vx, -8, 8)
-        cur_vy = np.clip(cur_vy, -8, 8)
-        # Reflect off brain bbox
-        cur_vx = np.where((cur_px < CX-BRX*0.8) | (cur_px > CX+BRX*0.8),
-                          -cur_vx, cur_vx)
-        cur_vy = np.where((cur_py < CY-BRY*0.8) | (cur_py > CY+BRY*0.8),
-                          -cur_vy, cur_vy)
-        cur_px = np.clip(cur_px, CX-BRX*0.85, CX+BRX*0.85)
-        cur_py = np.clip(cur_py, CY-BRY*0.85, CY+BRY*0.85)
+    # Update chaos particles
+    cs = 1.0 - flow
+    if cs > 0.005:
+        cur_px += cur_vx * cs
+        cur_py += cur_vy * cs
+        cur_vx += rng.uniform(-1.8, 1.8, N_PART) * cs
+        cur_vy += rng.uniform(-1.8, 1.8, N_PART) * cs
+        cur_vx  = np.clip(cur_vx, -9, 9)
+        cur_vy  = np.clip(cur_vy, -9, 9)
+        cur_vx  = np.where((cur_px < CX-BRX*0.8) | (cur_px > CX+BRX*0.8), -cur_vx, cur_vx)
+        cur_vy  = np.where((cur_py < CY-BRY*0.8) | (cur_py > CY+BRY*0.8), -cur_vy, cur_vy)
+        cur_px  = np.clip(cur_px, CX-BRX*0.85, CX+BRX*0.85)
+        cur_py  = np.clip(cur_py, CY-BRY*0.85, CY+BRY*0.85)
 
-    # Flow phase: advance along path
-    if flow > 0.01:
-        cur_pos = (cur_pos + part_path_spd * flow) % 1.0
+    # Advance flow particles along paths
+    if flow > 0.008:
+        part_path_pos[:] = (part_path_pos + part_path_spd * flow) % 1.0
         for i in range(N_PART):
             pi  = part_path_idx[i]
-            idx = int(cur_pos[i] * (len(PATHS_DENSE[pi])-1))
+            idx = int(part_path_pos[i] * (len(PATHS_DENSE[pi])-1))
             path_targets[i] = PATHS_DENSE[pi][idx]
 
-    img, _ = render(f, cur_px, cur_py, cur_vx, cur_vy, cur_pos)
+    # Update comet tail history
+    px_hist = np.roll(px_hist, 1, axis=0)
+    py_hist = np.roll(py_hist, 1, axis=0)
+    px_hist[0] = cur_px*(1-flow) + path_targets[:,0]*flow
+    py_hist[0] = cur_py*(1-flow) + path_targets[:,1]*flow
+
+    img, fl = render(f, cur_px, cur_py, px_hist, py_hist)
     img.save(os.path.join(FRAME_DIR, f"frame_{f:04d}.png"))
 
     if f % 30 == 0:
-        print(f"  {f}/{FRAMES}  t={t:.1f}s  flow={flow:.2f}", flush=True)
+        print(f"  {f}/{FRAMES}  t={t:.1f}s  flow={fl:.2f}", flush=True)
 
 # ── Encode ────────────────────────────────────────────────────────────────────
 print("Encoding...", flush=True)
-
 mp4 = os.path.join(OUT_DIR, "flow_brain.mp4")
 subprocess.run([
     "ffmpeg", "-y", "-framerate", str(FPS),
     "-i", os.path.join(FRAME_DIR, "frame_%04d.png"),
     "-c:v", "libx264", "-pix_fmt", "yuv420p",
-    "-preset", "slow", "-crf", "14",
+    "-preset", "slow", "-crf", "13",
     mp4
 ], capture_output=True)
 print(f"  MP4 → {mp4}  ({os.path.getsize(mp4)/1e6:.1f} MB)")
-
 shutil.rmtree(FRAME_DIR)
 print("Done.")
