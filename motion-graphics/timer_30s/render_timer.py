@@ -38,17 +38,20 @@ def font(sz):
             return ImageFont.truetype(p, sz)
     return ImageFont.load_default()
 
-def tsize(d, txt, f):
+def center_xy(d, txt, cx, cy, f):
+    """Top-left draw position that puts the glyphs' true visual bbox at (cx, cy)."""
     bb = d.textbbox((0, 0), txt, font=f)
-    return bb[2]-bb[0], bb[3]-bb[1]
+    tw, th = bb[2]-bb[0], bb[3]-bb[1]
+    return cx - tw//2 - bb[0], cy - th//2 - bb[1]
 
 def draw_center(d, txt, cx, cy, f, fill):
-    tw, th = tsize(d, txt, f)
-    d.text((cx - tw//2, cy - th//2), txt, font=f, fill=fill)
+    x, y = center_xy(d, txt, cx, cy, f)
+    d.text((x, y), txt, font=f, fill=fill)
 
 # ── Easing ────────────────────────────────────────────────────────────────────
 def clamp(v): return max(0.0, min(1.0, v))
-def ease_out(t): t = clamp(t); return 1 - (1-t)**3
+def ease_out(t):    t = clamp(t); return 1 - (1-t)**3
+def ease_in_out(t): t = clamp(t); return t*t*(3-2*t)
 
 # ── Ring geometry ─────────────────────────────────────────────────────────────
 RING_R   = 270
@@ -65,6 +68,25 @@ BAR_X1  = CX + BAR_W // 2
 BAR_Y   = CY + 430
 
 FNT_NUM   = font(260)
+
+def draw_glow_number(img, txt, cx, cy, scale, alpha, glow_alpha=160):
+    """Draw a centered glowing number at given scale/alpha; returns composited img."""
+    if alpha <= 0 or not txt:
+        return img
+    fs  = max(int(260 * scale), 10)
+    f_n = font(fs)
+    probe = ImageDraw.Draw(img, "RGBA")
+    x, y  = center_xy(probe, txt, cx, cy, f_n)
+
+    gl = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(gl, "RGBA")
+    gd.text((x, y), txt, font=f_n, fill=(*ELECTRIC, int(glow_alpha * alpha / 255)))
+    gl  = gl.filter(ImageFilter.GaussianBlur(radius=22))
+    img = Image.alpha_composite(img, gl)
+
+    d = ImageDraw.Draw(img, "RGBA")
+    d.text((x, y), txt, font=f_n, fill=(255, 255, 255, alpha))
+    return img
 
 # ── Render one frame ──────────────────────────────────────────────────────────
 def render(frame):
@@ -121,26 +143,22 @@ def render(frame):
         d3.ellipse([tip_x-dot_r, tip_y-dot_r, tip_x+dot_r, tip_y+dot_r],
                    fill=(*WHITE, 255))
 
-    # ── Countdown number (center, glow + crisp) ──────────────────────────────
-    num_txt = str(secs_left)
-    d4 = ImageDraw.Draw(img, "RGBA")
-
-    # Pop scale on each whole-second tick
+    # ── Countdown number — smooth cross-dissolve morph between ticks ─────────
+    secs_now  = secs_left
+    secs_next = max(0, secs_now - 1)
     tick_frac = t - math.floor(t)
-    pop = 1.0 + 0.10 * (1 - ease_out(tick_frac * 3.0))
-    fs_now = max(int(260 * pop), 10)
-    f_num  = font(fs_now)
 
-    # Glow layer
-    gl3 = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    gd3 = ImageDraw.Draw(gl3, "RGBA")
-    tw, th = tsize(gd3, num_txt, f_num)
-    gd3.text((CX-tw//2, CY-th//2), num_txt, font=f_num, fill=(*ELECTRIC, 160))
-    gl3 = gl3.filter(ImageFilter.GaussianBlur(radius=22))
-    img = Image.alpha_composite(img, gl3)
+    XFADE = 0.35   # fraction of each second spent morphing into the next number
+    fi    = ease_in_out(clamp((tick_frac - (1 - XFADE)) / XFADE)) if remaining > 0 else 0.0
 
-    d5 = ImageDraw.Draw(img, "RGBA")
-    draw_center(d5, num_txt, CX, CY, f_num, (*WHITE, 255))
+    cur_scale = 1.00 - 0.08 * fi      # shrinks slightly as it dissolves out
+    nxt_scale = 1.08 - 0.08 * fi      # eases in from slightly larger to 1.0
+    cur_alpha = int(255 * (1 - fi))
+    nxt_alpha = int(255 * fi)
+
+    img = draw_glow_number(img, str(secs_now), CX, CY, cur_scale, cur_alpha)
+    if fi > 0.001 and secs_next != secs_now:
+        img = draw_glow_number(img, str(secs_next), CX, CY, nxt_scale, nxt_alpha)
 
     # ── Loading bar (depletes left → right empties as time runs out) ─────────
     d6 = ImageDraw.Draw(img, "RGBA")
