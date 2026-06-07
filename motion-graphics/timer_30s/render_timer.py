@@ -65,7 +65,6 @@ BAR_X1  = CX + BAR_W // 2
 BAR_Y   = CY + 430
 
 FNT_NUM   = font(260)
-FNT_LABEL = font(40)
 
 # ── Render one frame ──────────────────────────────────────────────────────────
 def render(frame):
@@ -143,10 +142,6 @@ def render(frame):
     d5 = ImageDraw.Draw(img, "RGBA")
     draw_center(d5, num_txt, CX, CY, f_num, (*WHITE, 255))
 
-    # "SECONDS" label under number
-    label_a = 200
-    draw_center(d5, "SECONDS", CX, CY + 165, FNT_LABEL, (*ELECTRIC, label_a))
-
     # ── Loading bar (depletes left → right empties as time runs out) ─────────
     d6 = ImageDraw.Draw(img, "RGBA")
     # Track
@@ -171,10 +166,6 @@ def render(frame):
         shimmer_a = int(200 * (0.5 + 0.5*math.sin(t * 9)))
         d7.rectangle([BAR_X0+fill_w-2, BAR_Y-2, BAR_X0+fill_w+2, BAR_Y+BAR_H+2],
                      fill=(255, 255, 255, max(0, shimmer_a)))
-
-    # "TIME REMAINING" micro-label above bar
-    d8 = ImageDraw.Draw(img, "RGBA")
-    draw_center(d8, "TIME REMAINING", CX, BAR_Y - 34, font(28), (255, 255, 255, 110))
 
     # ── Flash pulse on final 3 seconds (urgency cue) ─────────────────────────
     if secs_left <= 3 and remaining > 0:
