@@ -3,79 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Robin Aoun — Creator. Footballer. Entrepreneur. Building a disciplined life around inspiration, development and high performance." />
+  <meta name="description" content="Robin Aoun — Footballer, creator &amp; entrepreneur from Skövde, Sweden. Building a disciplined life around inspiration, development and high performance. Join The Standard — a founding community for people building themselves in public." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:type" content="website" />
   <meta property="og:title" content="Robin Aoun" />
-  <meta property="og:description" content="Creator of life. Footballer. Entrepreneur." />
-  <title>Robin Aoun</title>
+  <meta property="og:description" content="Footballer. Creator. Entrepreneur. Join The Standard — first 20 founding members only." />
+  <meta property="og:url" content="https://robin100a541-prog.github.io" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Robin Aoun — Creator · Footballer · Entrepreneur</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Ctext x='50' y='72' font-family='Arial' font-size='62' font-weight='bold' fill='%23f5a623' text-anchor='middle'%3ERA%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- NAV -->
   <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">ROBIN<span>AOUN</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="#hero" class="nav-logo">ROBIN<span>AOUN</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#creator">Creator</a></li>
       <li><a href="#msj">MSJ</a></li>
       <li><a href="#social">Socials</a></li>
-      <li><a href="#discord" class="nav-community">Join Community</a></li>
+      <li><a href="#community" class="nav-community">The Standard</a></li>
       <li><a href="#contact" class="nav-cta">Work With Me</a></li>
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero-bg"><div class="hero-overlay"></div><div class="hero-grid"></div></div>
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-grid"></div>
+    </div>
     <div class="hero-content">
       <p class="hero-tagline fade-up">Creator · Footballer · Entrepreneur</p>
       <h1 class="hero-title">
         <span class="hero-robin fade-up delay-1">ROBIN</span>
-        <span class="hero-aoun fade-up delay-2"><span class="aoun-text">AOUN</span><span class="aoun-glow">AOUN</span></span>
+        <span class="hero-aoun fade-up delay-2">
+          <span class="aoun-text">AOUN</span>
+          <span class="aoun-glow" aria-hidden="true">AOUN</span>
+        </span>
       </h1>
-      <p class="hero-sub fade-up delay-3">Building a disciplined life around<br /><em>inspiration, development &amp; high performance.</em></p>
+      <p class="hero-sub fade-up delay-3">
+        Building a disciplined life around<br />
+        <em>inspiration, development &amp; high performance.</em>
+      </p>
       <div class="hero-actions fade-up delay-4">
-        <a href="#discord" class="btn btn-community"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Join the Community</a>
+        <a href="#community" class="btn btn-community">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.115zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.241-.579-.486-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          Apply to The Standard
+        </a>
         <a href="#about" class="btn btn-ghost">Discover My Story</a>
       </div>
       <div class="hero-stats fade-up delay-5">
-        <div class="stat"><span class="stat-num" data-count="100" data-suffix="K+">0</span><span class="stat-label">People Impacted</span></div>
+        <div class="stat">
+          <span class="stat-num" data-count="100" data-suffix="K+">0</span>
+          <span class="stat-label">People Impacted</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num" data-count="15" data-suffix="+">0</span><span class="stat-label">Clients</span></div>
+        <div class="stat">
+          <span class="stat-num" data-count="3">0</span>
+          <span class="stat-label">Businesses</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">Businesses</span></div>
+        <div class="stat">
+          <span class="stat-num" data-count="13">0</span>
+          <span class="stat-label">Years on the Pitch</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">Languages</span></div>
+        <div class="stat">
+          <span class="stat-num" data-count="4">0</span>
+          <span class="stat-label">Languages</span>
+        </div>
       </div>
     </div>
-    <a href="#about" class="scroll-indicator" aria-label="Scroll down"><span class="scroll-line"></span><span class="scroll-text">SCROLL</span></a>
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+      <span class="scroll-line"></span>
+      <span class="scroll-text">SCROLL</span>
+    </a>
   </section>
 
+  <!-- ABOUT -->
   <section class="section about" id="about">
     <div class="container">
-      <div class="about-text-only reveal">
-        <p class="section-label">Who I Am</p>
-        <h2 class="section-title">A creator<br />of <span class="accent">life.</span></h2>
-        <div class="about-cols">
-          <div class="about-col">
-            <p class="about-desc about-lead">I'm Robin Aoun — 19 years old, from Skövde, Sweden. I don't fit into one box. I'm a footballer, a creator, an entrepreneur, and someone who genuinely believes that with the right system and the right mindset, anything becomes possible.</p>
-            <p class="about-desc">My mission is to build a disciplined life around three things: <strong>inspiration</strong>, <strong>development</strong>, and <strong>high performance</strong>. Not just in football. Not just in business. In everything. Every single area of my life is something I'm actively building and improving.</p>
+      <div class="about-text-only">
+        <div class="section-header reveal">
+          <p class="section-label">Who I Am</p>
+          <h2 class="section-title">A creator<br />of <span class="accent">life.</span></h2>
+        </div>
+
+        <div class="about-cols reveal delay-1">
+          <div>
+            <p class="about-desc about-lead">
+              I'm Robin Aoun — 19 years old, from Skövde, Sweden. I don't fit into one box.
+              I'm a footballer, a creator, an entrepreneur, and someone who genuinely believes
+              that with the right system and the right mindset, anything becomes possible.
+            </p>
+            <p class="about-desc">
+              My mission is to build a disciplined life around three things:
+              <strong>inspiration</strong>, <strong>development</strong>, and
+              <strong>high performance</strong>. Not just in football. Not just in business.
+              In everything — the way I train, the way I create, the way I think.
+              Every area of my life is something I'm actively building and improving.
+            </p>
           </div>
-          <div class="about-col">
-            <p class="about-desc">I've played football across multiple countries — including Portugal with Sporting CP — created content that's reached hundreds of thousands of people, and built businesses from scratch at 19. I speak Swedish, English, Arabic, and French. I communicate through action.</p>
-            <p class="about-desc about-closer">What drives me isn't the destination — it's the discipline it takes to get there, and the person you become along the way.</p>
-            <div class="about-contact-nudge">Want to know more? <a href="#contact">Reach out — I respond personally.</a></div>
+          <div>
+            <p class="about-desc">
+              I've played football across multiple countries — including time in Portugal
+              within Sporting CP's world — created content that's reached hundreds of
+              thousands of people, and built businesses from scratch at 19. I speak Swedish,
+              English, Arabic, and French. I communicate through action.
+            </p>
+            <p class="about-desc about-closer">
+              What drives me isn't the destination — it's the discipline it takes to get there,
+              and the person you become along the way. And I want to pull as many people up
+              with me as I can.
+            </p>
           </div>
         </div>
-        <div class="about-tags">
-          <span class="tag">⚽ Footballer</span><span class="tag">🎬 Creator</span><span class="tag">📈 Entrepreneur</span><span class="tag">🏠 Real Estate</span><span class="tag">🌍 Multi-lingual</span>
+
+        <div class="about-contact-nudge reveal delay-1">
+          Want to know more about me or what I do?
+          <a href="#contact">Reach out — I respond personally.</a>
+        </div>
+
+        <div class="about-tags reveal delay-1">
+          <span class="tag">⚽ Footballer</span>
+          <span class="tag">🎬 Creator</span>
+          <span class="tag">📈 Entrepreneur</span>
+          <span class="tag">🏠 Real Estate</span>
+          <span class="tag">🌍 Multi-lingual</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CREATOR & BUSINESS -->
   <section class="section creator" id="creator">
     <div class="container">
       <div class="section-header reveal">
@@ -83,37 +152,151 @@
         <h2 class="section-title">Creator.<br /><span class="accent">Entrepreneur.</span></h2>
         <p class="section-subtitle">Building multiple things at once — content, brands, businesses, and a life worth talking about. Also a footballer, currently playing senior football in Sweden.</p>
       </div>
+
       <div class="creator-cards-grid">
-        <div class="creator-card reveal"><div class="cc-icon">🎬</div><h3>Content Creation</h3><p>Cinematic motivational content — bold visuals, deep captions, real footage that hits the soul. Reels, TikToks, and carousels built to inspire.</p><ul class="cc-tags"><li>DaVinci Resolve</li><li>Reels & TikTok</li><li>Cinematic Edits</li></ul></div>
-        <div class="creator-card reveal delay-1"><div class="cc-icon">📈</div><h3>Digital Marketing</h3><p>Freelance digital marketing firm helping brands grow. Editing, social strategy, motion graphics, and brand storytelling for clients across industries.</p><ul class="cc-tags"><li>Social Strategy</li><li>Motion Graphics</li><li>Brand Growth</li></ul></div>
-        <div class="creator-card reveal delay-2"><div class="cc-icon">🏠</div><h3>Real Estate</h3><p>Co-owner of <strong>CRI Fastigheter AB</strong>, leading invoicing, budgeting, planning, and renovation project management from age 19.</p><ul class="cc-tags"><li>CRI Fastigheter AB</li><li>Project Management</li><li>Budgeting</li></ul></div>
+        <div class="creator-card reveal">
+          <div class="cc-icon">🎬</div>
+          <h3>Content Creation</h3>
+          <p>
+            Cinematic motivational content — bold visuals, deep philosophical
+            captions, real footage that hits the soul. Short-form Reels, TikToks,
+            and carousels built to inspire.
+          </p>
+          <ul class="cc-tags">
+            <li>DaVinci Resolve</li>
+            <li>Reels &amp; TikTok</li>
+            <li>Cinematic Edits</li>
+          </ul>
+        </div>
+
+        <div class="creator-card reveal delay-1">
+          <div class="cc-icon">📈</div>
+          <h3>Digital Marketing</h3>
+          <p>
+            Running a freelance digital marketing firm helping brands and individuals
+            grow. Editing, social strategy, motion graphics, and brand storytelling
+            for clients across industries.
+          </p>
+          <ul class="cc-tags">
+            <li>Social Strategy</li>
+            <li>Motion Graphics</li>
+            <li>Brand Growth</li>
+          </ul>
+        </div>
+
+        <div class="creator-card reveal delay-2">
+          <div class="cc-icon">🏠</div>
+          <h3>Real Estate</h3>
+          <p>
+            Co-owner of <strong>CRI Fastigheter AB</strong>, leading invoicing,
+            budgeting, planning, and renovation project management from age 19.
+          </p>
+          <ul class="cc-tags">
+            <li>CRI Fastigheter AB</li>
+            <li>Project Management</li>
+            <li>Budgeting</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section discord-section" id="discord">
-    <div class="discord-bg"></div>
+  <!-- THE STANDARD — FOUNDING COMMUNITY (MAIN HIGHLIGHT) -->
+  <section class="section community" id="community">
+    <div class="community-bg"></div>
     <div class="container">
-      <div class="discord-inner">
-        <div class="discord-top reveal">
-          <div class="discord-badge"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>JOIN THE COMMUNITY</div>
-          <h2 class="section-title discord-title">This is where the<br /><span class="discord-accent">real talk</span> happens.</h2>
-          <p class="discord-sub">Not just a Discord server. A room full of people actually building something — footballers, entrepreneurs, creators, and grinders who refuse to settle. If you're serious about your life, your brand, and your game — this is where you belong.</p>
+      <div class="community-inner">
+
+        <div class="community-top reveal">
+          <div class="community-badge">
+            <span class="badge-dot"></span>
+            FIRST 20 ONLY · BY APPLICATION
+          </div>
+          <h2 class="section-title community-title">
+            This isn't a fan group.<br />
+            It's <span class="accent">The Standard.</span>
+          </h2>
+          <p class="community-sub">
+            A small, private room for people who are actually building themselves —
+            discipline, content, brand, body, mindset. We push each other, we stay
+            accountable, and we don't do it alone. The first members set the culture,
+            so I'm hand-picking the founding circle. <strong>Limited spots — and once
+            they're gone, they're gone.</strong>
+          </p>
         </div>
-        <div class="discord-reasons reveal delay-1">
-          <div class="discord-reason"><div class="dr-icon">🤝</div><div class="dr-text"><h4>Real Connections</h4><p>Meet ambitious people from all over — footballers, creators, entrepreneurs. The right network changes everything.</p></div></div>
-          <div class="discord-reason"><div class="dr-icon">💰</div><div class="dr-text"><h4>Money & Business Talk</h4><p>How to make money online, build a brand, start from nothing. Real strategies — no gatekeeping.</p></div></div>
-          <div class="discord-reason"><div class="dr-icon">📲</div><div class="dr-text"><h4>Grow Your Social Media</h4><p>Build an audience, create content that converts, turn your following into something real.</p></div></div>
-          <div class="discord-reason"><div class="dr-icon">⚽</div><div class="dr-text"><h4>Football & Performance</h4><p>Mindset, training, career advice. For players who want more than just the game.</p></div></div>
+
+        <div class="community-reasons reveal delay-1">
+          <div class="community-reason">
+            <div class="cr-icon">🔒</div>
+            <div class="cr-text">
+              <h4>You're a Founder, Not a Follower</h4>
+              <p>The first 20 build the standard this room holds itself to. You're not joining something finished — you're shaping it.</p>
+            </div>
+          </div>
+          <div class="community-reason">
+            <div class="cr-icon">🔥</div>
+            <div class="cr-text">
+              <h4>Real Accountability</h4>
+              <p>Weekly intentions, midweek check-ins, Sunday wins. We hold each other to the work nobody sees — not lazy hype.</p>
+            </div>
+          </div>
+          <div class="community-reason">
+            <div class="cr-icon">📲</div>
+            <div class="cr-text">
+              <h4>Grow Together</h4>
+              <p>A space to share what you're building, get real feedback, and push each other's content and brand forward — for real.</p>
+            </div>
+          </div>
+          <div class="community-reason">
+            <div class="cr-icon">🧠</div>
+            <div class="cr-text">
+              <h4>Mindset &amp; Performance</h4>
+              <p>Direct conversations on discipline, business and football. Surround yourself with people who refuse to settle.</p>
+            </div>
+          </div>
         </div>
-        <div class="discord-cta reveal delay-2">
-          <a href="https://discord.gg/tAvSQ7bD" target="_blank" rel="noopener" class="discord-btn"><svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Join the Discord — It's Free</a>
-          <p class="discord-cta-note">Already have people in here. Come see what's going on.</p>
+
+        <!-- APPLICATION -->
+        <div class="apply-card reveal delay-2">
+          <div class="apply-head">
+            <h3>How to Apply</h3>
+            <p>Spots are limited and I read every message personally. To apply, send me a
+               <strong>WhatsApp</strong> and tell me why you should be in the room — answer these:</p>
+          </div>
+          <ol class="apply-questions">
+            <li><span>1</span> Your name &amp; where you're from</li>
+            <li><span>2</span> What you're building right now (football, business, content, brand, mindset…)</li>
+            <li><span>3</span> Why you want in — what are you trying to become?</li>
+            <li><span>4</span> The ONE thing you're trying to stay disciplined about right now</li>
+            <li><span>5</span> Are you ready to show up and contribute — not just watch?</li>
+          </ol>
+          <div class="apply-cta">
+            <a href="https://wa.me/46700000000?text=Hey%20Robin%2C%20I%20want%20to%20apply%20for%20The%20Standard.%0A%0A1)%20Name%20%2B%20where%20I'm%20from%3A%0A2)%20What%20I'm%20building%20right%20now%3A%0A3)%20Why%20I%20want%20in%20%2F%20what%20I'm%20trying%20to%20become%3A%0A4)%20The%20one%20thing%20I'm%20locking%20in%20discipline%20on%3A%0A5)%20I'm%20ready%20to%20show%20up%20%26%20contribute%20(yes%2Fno)%3A"
+               target="_blank" rel="noopener" class="apply-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.115zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.241-.579-.486-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+              Apply on WhatsApp
+            </a>
+            <p class="apply-note">Pre-fills the questions for you — just fill in your answers and send.</p>
+          </div>
         </div>
+
+        <!-- OPEN TIER: DISCORD -->
+        <div class="community-discord reveal delay-2">
+          <div class="cd-text">
+            <span class="cd-label">Not ready to apply yet?</span>
+            <p>Hang out in the open Discord first — meet the people, see the energy, then apply when you're ready.</p>
+          </div>
+          <a href="https://discord.gg/tAvSQ7bD" target="_blank" rel="noopener" class="cd-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            Open Discord
+          </a>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- MSJ -->
   <section class="section msj" id="msj">
     <div class="msj-bg"></div>
     <div class="container">
@@ -121,68 +304,167 @@
         <div class="msj-text reveal">
           <p class="section-label">Partnership</p>
           <h2 class="section-title">MySoccer<br /><span class="accent">Journey</span></h2>
-          <p class="msj-desc">MSJ is a football player and personal development community built on 6 pillars: <em>Technical, Tactical, Physical, Health, Mental, and Holistic.</em></p>
-          <p class="msj-desc">As MSJ's operator and marketing lead, I run all social media, produce content, handle club outreach, and help footballers grow in every area of their game and life. I also work directly with founder Rehan Rayani on mindset and performance.</p>
+          <p class="msj-desc">
+            MSJ is a football player and personal development community built on 6 pillars:
+            <em>Technical, Tactical, Physical, Health, Mental, and Holistic.</em>
+          </p>
+          <p class="msj-desc">
+            As MSJ's operator and marketing lead, I run all social media, produce content,
+            handle club outreach, and help footballers grow in every area of their game and life.
+            I also participate as a member — working directly with founder Rehan Rayani
+            on mindset and performance.
+          </p>
           <div class="msj-links">
             <a href="https://members.mysoccerjourney.net/communities/groups/mysoccerjourney-community/home" target="_blank" rel="noopener" class="btn btn-primary">Visit MSJ</a>
             <a href="https://www.instagram.com/msj_community/" target="_blank" rel="noopener" class="btn btn-ghost">@msj_community</a>
           </div>
         </div>
         <div class="msj-pillars reveal delay-1">
-          <div class="pillar"><span>01</span>Technical</div><div class="pillar"><span>02</span>Tactical</div><div class="pillar"><span>03</span>Physical</div><div class="pillar"><span>04</span>Health</div><div class="pillar"><span>05</span>Mental</div><div class="pillar"><span>06</span>Holistic</div>
+          <div class="pillar"><span>01</span>Technical</div>
+          <div class="pillar"><span>02</span>Tactical</div>
+          <div class="pillar"><span>03</span>Physical</div>
+          <div class="pillar"><span>04</span>Health</div>
+          <div class="pillar"><span>05</span>Mental</div>
+          <div class="pillar"><span>06</span>Holistic</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SOCIAL -->
   <section class="section social" id="social">
     <div class="container">
       <div class="section-header reveal">
         <p class="section-label">Why Follow Me</p>
         <h2 class="section-title">Join the<br /><span class="accent">journey.</span></h2>
-        <p class="section-subtitle">Real content. Real growth. Authentic ambition documented in real time.</p>
+        <p class="section-subtitle">
+          Real content. Real football. Real growth. No faking it — just authentic ambition
+          documented in real time.
+        </p>
       </div>
       <div class="social-platforms reveal">
-        <a href="https://www.instagram.com/robin.aoun/" target="_blank" rel="noopener" class="platform-card"><div class="platform-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div><div class="platform-info"><span class="platform-name">Instagram</span><span class="platform-handle">@robin.aoun</span></div><span class="platform-arrow">→</span></a>
-        <a href="https://www.tiktok.com/@robinnaoun" target="_blank" rel="noopener" class="platform-card"><div class="platform-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.88a8.16 8.16 0 004.77 1.52V7.0a4.85 4.85 0 01-1-.31z"/></svg></div><div class="platform-info"><span class="platform-name">TikTok</span><span class="platform-handle">@robinnaoun</span></div><span class="platform-arrow">→</span></a>
-        <a href="https://www.youtube.com/@robinaoun8814/videos" target="_blank" rel="noopener" class="platform-card"><div class="platform-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div><div class="platform-info"><span class="platform-name">YouTube</span><span class="platform-handle">Robin Aoun</span></div><span class="platform-arrow">→</span></a>
-        <a href="https://www.linkedin.com/in/robin-aoun-18a733344/" target="_blank" rel="noopener" class="platform-card"><div class="platform-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 23.2 23.227 23.2 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div><div class="platform-info"><span class="platform-name">LinkedIn</span><span class="platform-handle">Robin Aoun</span></div><span class="platform-arrow">→</span></a>
+        <a href="https://www.instagram.com/robin.aoun/" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          <div class="platform-info">
+            <span class="platform-name">Instagram</span>
+            <span class="platform-handle">@robin.aoun</span>
+          </div>
+          <span class="platform-arrow">→</span>
+        </a>
+        <a href="https://www.tiktok.com/@robinnaoun" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.88a8.16 8.16 0 004.77 1.52V7.0a4.85 4.85 0 01-1-.31z"/></svg>
+          </div>
+          <div class="platform-info">
+            <span class="platform-name">TikTok</span>
+            <span class="platform-handle">@robinnaoun</span>
+          </div>
+          <span class="platform-arrow">→</span>
+        </a>
+        <a href="https://www.youtube.com/@robinaoun8814/videos" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <div class="platform-info">
+            <span class="platform-name">YouTube</span>
+            <span class="platform-handle">Robin Aoun</span>
+          </div>
+          <span class="platform-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/robin-aoun-18a733344/" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 23.2 23.227 23.2 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div class="platform-info">
+            <span class="platform-name">LinkedIn</span>
+            <span class="platform-handle">Robin Aoun</span>
+          </div>
+          <span class="platform-arrow">→</span>
+        </a>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section class="section contact" id="contact">
     <div class="container">
       <div class="contact-inner reveal">
         <p class="section-label">Work With Me</p>
         <h2 class="section-title contact-title">Let's build<br /><span class="accent">together.</span></h2>
-        <p class="contact-sub">I've helped over <strong>15 clients</strong> grow their brands, expand their reach, and produce content that actually converts — through editing, marketing strategy, and social media management. Ready to take your brand to the next level? Let's talk.</p>
+        <p class="contact-sub">
+          I've helped over <strong>15 clients</strong> grow their brands, expand their reach,
+          and produce content that actually converts — through editing, marketing strategy,
+          and social media management. If you're ready to take your brand to the next level,
+          let's talk.
+        </p>
+
         <div class="contact-proof">
-          <div class="proof-stat"><span class="proof-num">15+</span><span class="proof-label">Clients Worked With</span></div>
-          <div class="proof-stat"><span class="proof-num">100K+</span><span class="proof-label">People Reached</span></div>
-          <div class="proof-stat"><span class="proof-num">3+</span><span class="proof-label">Active Businesses</span></div>
+          <div class="proof-stat">
+            <span class="proof-num">15+</span>
+            <span class="proof-label">Clients Worked With</span>
+          </div>
+          <div class="proof-stat">
+            <span class="proof-num">100K+</span>
+            <span class="proof-label">People Reached</span>
+          </div>
+          <div class="proof-stat">
+            <span class="proof-num">3+</span>
+            <span class="proof-label">Active Businesses</span>
+          </div>
         </div>
+
         <div class="contact-options">
-          <a href="mailto:robin100a541@gmail.com" class="contact-card"><div class="contact-card-icon">✉️</div><div class="contact-card-text"><strong>Email</strong><span>robin100a541@gmail.com</span></div></a>
-          <a href="https://www.instagram.com/robin.aoun/" target="_blank" rel="noopener" class="contact-card"><div class="contact-card-icon">📱</div><div class="contact-card-text"><strong>Instagram DM</strong><span>@robin.aoun</span></div></a>
-          <a href="https://www.linkedin.com/in/robin-aoun-18a733344/" target="_blank" rel="noopener" class="contact-card"><div class="contact-card-icon">💼</div><div class="contact-card-text"><strong>LinkedIn</strong><span>Professional inquiries</span></div></a>
+          <a href="mailto:robin100a541@gmail.com" class="contact-card">
+            <div class="contact-card-icon">✉️</div>
+            <div class="contact-card-text">
+              <strong>Email</strong>
+              <span>robin100a541@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/robin.aoun/" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-card-icon">📱</div>
+            <div class="contact-card-text">
+              <strong>Instagram DM</strong>
+              <span>@robin.aoun</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/robin-aoun-18a733344/" target="_blank" rel="noopener" class="contact-card">
+            <div class="contact-card-icon">💼</div>
+            <div class="contact-card-text">
+              <strong>LinkedIn</strong>
+              <span>Professional inquiries</span>
+            </div>
+          </a>
         </div>
-        <div class="contact-services"><h4>Available for:</h4><div class="services-tags"><span>Video Editing</span><span>Social Media Management</span><span>Motion Graphics</span><span>Brand Partnerships</span><span>Content Strategy</span><span>MSJ Community</span></div></div>
+        <div class="contact-services">
+          <h4>Available for:</h4>
+          <div class="services-tags">
+            <span>Video Editing</span>
+            <span>Social Media Management</span>
+            <span>Motion Graphics</span>
+            <span>Brand Partnerships</span>
+            <span>Content Strategy</span>
+            <span>MSJ Community</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
-        <a href="#" class="footer-logo">ROBIN<span>AOUN</span></a>
+        <a href="#hero" class="footer-logo">ROBIN<span>AOUN</span></a>
         <p class="footer-copy">© 2026 Robin Aoun. All rights reserved.</p>
         <div class="footer-socials">
-          <a href="https://www.instagram.com/robin.aoun/" target="_blank" rel="noopener">IG</a>
-          <a href="https://www.tiktok.com/@robinnaoun" target="_blank" rel="noopener">TK</a>
-          <a href="https://www.youtube.com/@robinaoun8814/videos" target="_blank" rel="noopener">YT</a>
-          <a href="https://www.linkedin.com/in/robin-aoun-18a733344/" target="_blank" rel="noopener">LI</a>
-          <a href="https://discord.gg/tAvSQ7bD" target="_blank" rel="noopener">DC</a>
+          <a href="https://www.instagram.com/robin.aoun/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://www.tiktok.com/@robinnaoun" target="_blank" rel="noopener" aria-label="TikTok">TK</a>
+          <a href="https://www.youtube.com/@robinaoun8814/videos" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+          <a href="https://www.linkedin.com/in/robin-aoun-18a733344/" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+          <a href="https://discord.gg/tAvSQ7bD" target="_blank" rel="noopener" aria-label="Discord">DC</a>
         </div>
       </div>
     </div>
