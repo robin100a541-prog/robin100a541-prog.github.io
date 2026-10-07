@@ -15,7 +15,7 @@ CREATE TABLE profiles (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ---- Housing queue ----
+-- ---- Housing queue (legacy, kept for backwards compat) ----
 CREATE TABLE housing_queue (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES auth.users ON DELETE SET NULL,
@@ -28,6 +28,23 @@ CREATE TABLE housing_queue (
   status TEXT DEFAULT 'pending',
   admin_notes TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ---- Queue entries (per-property queue system) ----
+CREATE TABLE queue_entries (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  property_id TEXT NOT NULL,
+  user_id UUID REFERENCES auth.users ON DELETE SET NULL,
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  preferred_size TEXT,
+  notes TEXT,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','contacted','approved','rejected','withdrawn')),
+  admin_notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(property_id, email)
 );
 
 -- ---- Fault reports ----
@@ -62,6 +79,7 @@ CREATE TABLE contact_messages (
 -- ============================================================
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE housing_queue ENABLE ROW LEVEL SECURITY;
+ALTER TABLE queue_entries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE fault_reports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
 
@@ -82,6 +100,16 @@ CREATE POLICY "Anyone can submit to housing queue" ON housing_queue
 CREATE POLICY "Users see own queue entry" ON housing_queue
   FOR SELECT USING (auth.uid() = user_id OR user_id IS NULL);
 
+-- ---- Queue entries policies ----
+CREATE POLICY "Anyone can join queue" ON queue_entries
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Anyone can view queue count" ON queue_entries
+  FOR SELECT USING (true);
+
+CREATE POLICY "Users see own queue entry" ON queue_entries
+  FOR UPDATE USING (auth.uid() = user_id);
+
 -- ---- Fault report policies ----
 CREATE POLICY "Anyone can submit fault report" ON fault_reports
   FOR INSERT WITH CHECK (true);
@@ -99,6 +127,11 @@ CREATE POLICY "Users see own messages" ON contact_messages
 -- ============================================================
 -- Admin policies (admin can see/edit all rows)
 -- ============================================================
+CREATE POLICY "Admin manages all queue_entries" ON queue_entries
+  FOR ALL USING (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND is_admin = true)
+  );
+
 CREATE POLICY "Admin sees all queue" ON housing_queue
   FOR ALL USING (
     EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND is_admin = true)

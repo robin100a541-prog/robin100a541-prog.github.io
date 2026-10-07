@@ -3,27 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CRJ Fastigheter AB – Kvalitetsbostäder i Skövdeområdet sedan 2019. Trygg och långsiktig hyresvärd i Skultorp och Skövde.">
-  <title>CRJ Fastigheter AB – Välkommen hem</title>
+  <meta name="description" content="CRJ Fastigheter AB – Hyresrätter på Skövdevägen 39, Skultorp. Privat hyresvärd grundad 2019.">
+  <title>CRJ Fastigheter AB</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='60' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23B8933F' font-weight='700'>C</text></svg>">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
 
-  <!-- ========== SITE INTRO ========== -->
+  <!-- ========== INTRO ========== -->
   <div id="site-intro" aria-hidden="true">
     <div class="intro__curtain intro__curtain--top"></div>
     <div class="intro__curtain intro__curtain--bottom"></div>
@@ -31,7 +25,7 @@
       <div class="intro__mark">CRJ</div>
       <div class="intro__name"><span class="intro__name-inner">CRJ Fastigheter AB</span></div>
       <div class="intro__line"></div>
-      <div class="intro__sub">Välskötta hem i Skövdeområdet</div>
+      <div class="intro__sub">Skövdevägen 39 · Skultorp</div>
     </div>
   </div>
 
@@ -42,15 +36,15 @@
         <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB – Startsida">
           <div class="navbar__logo-mark">CRJ</div>
           <div class="navbar__logo-text">
-            <span class="navbar__logo-name">CRJ Fastigheter</span>
-            <span class="navbar__logo-sub">Fastighets AB</span>
+            <span class="navbar__logo-name">CRJ Fastigheter AB</span>
+            <span class="navbar__logo-sub">Org.nr 559218-7032</span>
           </div>
         </a>
 
         <ul class="navbar__nav" role="list">
-          <li><a href="index.html" class="navbar__link">Hem</a></li>
-          <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
-          <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
+          <li><a href="index.html" class="navbar__link active">Hem</a></li>
+          <li><a href="om-oss.html" class="navbar__link">Om bolaget</a></li>
+          <li><a href="lagenheter.html" class="navbar__link">Fastigheten</a></li>
           <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
           <li><a href="bostadsko.html" class="navbar__link">Bostadskö</a></li>
           <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
@@ -67,12 +61,10 @@
 
   <!-- Mobile Menu -->
   <div class="navbar__mobile" role="dialog" aria-label="Mobilmeny">
-    <button class="navbar__mobile-close" aria-label="Stäng meny">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+    <button class="navbar__mobile-close" aria-label="Stäng meny"><i class="fa-solid fa-xmark"></i></button>
     <a href="index.html" class="navbar__mobile-link">Hem</a>
-    <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
-    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
+    <a href="om-oss.html" class="navbar__mobile-link">Om bolaget</a>
+    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheten</a>
     <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
     <a href="bostadsko.html" class="navbar__mobile-link">Bostadskö</a>
     <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
@@ -81,20 +73,15 @@
   </div>
 
   <!-- ========== HERO ========== -->
-  <section class="hero" aria-label="Välkomstsida">
-    <!-- SVG Background Pattern -->
+  <section class="hero" aria-label="Startsida">
     <div class="hero__bg-pattern" aria-hidden="true">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.5"/>
-          </pattern>
-          <pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse">
-            <circle cx="15" cy="15" r="1" fill="white"/>
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.4"/>
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)"/>
-        <rect width="100%" height="100%" fill="url(#dots)" opacity="0.5"/>
       </svg>
     </div>
     <div class="hero__bg-overlay" aria-hidden="true"></div>
@@ -102,22 +89,19 @@
     <div class="container">
       <div class="hero__content">
         <div class="hero__tag">
-          <i class="fa-solid fa-building"></i>
-          Etablerad 2019 &nbsp;·&nbsp; Skövdeområdet
+          Skövdevägen 39, Skultorp
         </div>
-        <h1 class="hero__title">Välkommen <em>hem</em></h1>
+        <h1 class="hero__title">Hyresrätter i<br><em>Skultorp</em></h1>
         <p class="hero__subtitle">
-          Vi på CRJ Fastigheter AB erbjuder trygga och välskötta hyresrätter i Skultorp,
-          nära Skövde. Långsiktigt ägarskap för dig som vill ha ett stabilt hem.
+          CRJ Fastigheter AB äger och förvaltar en bostadsfastighet i Skultorp,
+          ca 5 km söder om Skövde centrum. Kontakt sker direkt med oss som ägare.
         </p>
         <div class="hero__actions">
-          <a href="lediga.html" class="btn btn--primary btn--lg">
-            <i class="fa-solid fa-door-open"></i>
-            Se lediga lägenheter
+          <a href="lagenheter.html" class="btn btn--gold btn--lg">
+            Se fastigheten
           </a>
-          <a href="kontakt.html" class="btn btn--outline btn--lg">
-            <i class="fa-solid fa-envelope"></i>
-            Kontakta oss
+          <a href="bostadsko.html" class="btn btn--outline btn--lg">
+            Ställ dig i kö
           </a>
         </div>
       </div>
@@ -129,294 +113,200 @@
     </div>
   </section>
 
-  <!-- ========== STATS BAR ========== -->
-  <div class="stats-bar" aria-label="Nyckeltal">
+  <!-- ========== STATS ========== -->
+  <div class="stats-bar">
     <div class="container--wide">
       <div class="stats-bar__inner">
         <div class="stats-bar__item fade-in">
-          <span class="stats-bar__value">Sedan 2019</span>
+          <span class="stats-bar__value">2019</span>
           <span class="stats-bar__label">Grundat</span>
         </div>
         <div class="stats-bar__item fade-in fade-delay-1">
           <span class="stats-bar__value">Skultorp</span>
-          <span class="stats-bar__label">Skövdeområdet</span>
+          <span class="stats-bar__label">Skövde kommun</span>
         </div>
         <div class="stats-bar__item fade-in fade-delay-2">
-          <span class="stats-bar__value">Trygg</span>
-          <span class="stats-bar__label">Förvaltning</span>
+          <span class="stats-bar__value">Privat</span>
+          <span class="stats-bar__label">Ägandeform</span>
         </div>
         <div class="stats-bar__item fade-in fade-delay-3">
-          <span class="stats-bar__value">1 fastighet</span>
-          <span class="stats-bar__label">Skövdevägen 39</span>
+          <span class="stats-bar__value">559218-7032</span>
+          <span class="stats-bar__label">Org.nr</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ========== ABOUT PREVIEW ========== -->
-  <section class="section" id="om-oss">
+  <!-- ========== ABOUT ========== -->
+  <section class="section">
     <div class="container">
-      <div class="about-preview">
-        <div class="about-preview__visual fade-in-left">
-          <div class="about-preview__card">
-            <!-- SVG Building Illustration -->
-            <svg class="building-svg" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- Ground -->
-              <rect x="0" y="260" width="300" height="20" fill="rgba(255,255,255,0.05)" rx="2"/>
-              <!-- Main building -->
-              <rect x="60" y="80" width="180" height="180" fill="rgba(255,255,255,0.08)" rx="4"/>
-              <!-- Roof -->
-              <polygon points="150,30 30,85 270,85" fill="rgba(200,169,110,0.3)"/>
-              <!-- Door -->
-              <rect x="127" y="210" width="46" height="50" fill="rgba(200,169,110,0.4)" rx="3"/>
-              <circle cx="165" cy="237" r="3" fill="rgba(200,169,110,0.8)"/>
-              <!-- Windows row 1 -->
-              <rect x="80" y="105" width="36" height="30" fill="rgba(255,255,255,0.12)" rx="2"/>
-              <rect x="132" y="105" width="36" height="30" fill="rgba(255,255,255,0.12)" rx="2"/>
-              <rect x="184" y="105" width="36" height="30" fill="rgba(200,169,110,0.25)" rx="2"/>
-              <!-- Windows row 2 -->
-              <rect x="80" y="155" width="36" height="30" fill="rgba(200,169,110,0.25)" rx="2"/>
-              <rect x="132" y="155" width="36" height="30" fill="rgba(255,255,255,0.12)" rx="2"/>
-              <rect x="184" y="155" width="36" height="30" fill="rgba(255,255,255,0.12)" rx="2"/>
-              <!-- Tree left -->
-              <rect x="20" y="200" width="8" height="60" fill="rgba(255,255,255,0.1)"/>
-              <ellipse cx="24" cy="190" rx="20" ry="28" fill="rgba(255,255,255,0.07)"/>
-              <!-- Tree right -->
-              <rect x="272" y="215" width="8" height="45" fill="rgba(255,255,255,0.1)"/>
-              <ellipse cx="276" cy="205" rx="18" ry="24" fill="rgba(255,255,255,0.07)"/>
-            </svg>
-          </div>
-          <div class="about-preview__badge">
-            <span class="about-preview__badge-value">2019</span>
-            <span class="about-preview__badge-label">Grundat</span>
+      <div class="about-grid">
+        <div class="about-visual fade-in-left">
+          <svg class="building-svg" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="258" width="300" height="22" fill="rgba(255,255,255,0.04)"/>
+            <rect x="60" y="80" width="180" height="178" fill="rgba(255,255,255,0.06)" rx="3"/>
+            <polygon points="150,32 28,85 272,85" fill="rgba(184,147,63,0.22)"/>
+            <rect x="126" y="208" width="48" height="50" fill="rgba(184,147,63,0.35)" rx="2"/>
+            <circle cx="165" cy="235" r="3" fill="rgba(184,147,63,0.7)"/>
+            <rect x="80" y="106" width="36" height="30" fill="rgba(255,255,255,0.09)" rx="2"/>
+            <rect x="132" y="106" width="36" height="30" fill="rgba(255,255,255,0.09)" rx="2"/>
+            <rect x="184" y="106" width="36" height="30" fill="rgba(184,147,63,0.2)" rx="2"/>
+            <rect x="80" y="156" width="36" height="30" fill="rgba(184,147,63,0.2)" rx="2"/>
+            <rect x="132" y="156" width="36" height="30" fill="rgba(255,255,255,0.09)" rx="2"/>
+            <rect x="184" y="156" width="36" height="30" fill="rgba(255,255,255,0.09)" rx="2"/>
+            <rect x="18" y="200" width="7" height="58" fill="rgba(255,255,255,0.07)"/>
+            <ellipse cx="21" cy="190" rx="18" ry="25" fill="rgba(255,255,255,0.05)"/>
+            <rect x="275" y="214" width="7" height="44" fill="rgba(255,255,255,0.07)"/>
+            <ellipse cx="278" cy="204" rx="16" ry="22" fill="rgba(255,255,255,0.05)"/>
+          </svg>
+          <div class="about-visual__badge">
+            <strong>2019</strong>
+            <span>Grundat</span>
           </div>
         </div>
 
-        <div class="about-preview__content fade-in-right">
-          <span class="section-tag">Om CRJ Fastigheter</span>
-          <h2 class="section-title">En trygg hyresvärd<br>med lokalt fokus</h2>
+        <div class="about-content fade-in-right">
+          <span class="section-label">Om bolaget</span>
+          <h2>Privat hyresvärd sedan 2019</h2>
           <div class="divider"></div>
           <p>
-            CRJ Fastigheter AB grundades 2019 med en tydlig vision: att erbjuda välskötta,
-            trygga och prisvärda bostäder i Skövdeområdet. Vi är ett familjärt bolag med
-            ett långsiktigt perspektiv på förvaltning.
+            CRJ Fastigheter AB äger och förvaltar en bostadsfastighet i Skultorp,
+            ett bostadsområde söder om Skövde. Bolaget grundades 2019 och är ett
+            aktiebolag med org.nr 559218-7032.
           </p>
-          <p style="margin-top: 12px;">
-            Vår fastighet på Skövdevägen 39 i Skultorp är välskött och ligger i ett lugnt
-            och trivsamt område, med goda kommunikationer till Skövde centrum.
+          <p class="mt-4">
+            Fastigheten ligger på Skövdevägen 39 i Skultorp, med busshållplats
+            nära och goda förbindelser till Skövde centrum.
           </p>
-
-          <ul class="about-preview__list" role="list">
-            <li class="about-preview__list-item">
-              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-              Personlig och snabb service för alla hyresgäster
-            </li>
-            <li class="about-preview__list-item">
-              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-              Välskötta lägenheter med hög standard
-            </li>
-            <li class="about-preview__list-item">
-              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-              Stabilt och långsiktigt ägande sedan 2019
-            </li>
-            <li class="about-preview__list-item">
-              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-              Solida finanser – 12,5 MSEK i tillgångar
-            </li>
+          <ul class="check-list mt-6">
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i>Direkt kontakt med ägaren, ingen förvaltningsbyrå</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i>Felanmälan hanteras utan mellanhänder</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i>Läge i Skultorp ca 5 km söder om Skövde centrum</li>
           </ul>
-
-          <a href="om-oss.html" class="btn btn--outline-navy" style="margin-top: 32px;">
-            Läs mer om oss
-            <i class="fa-solid fa-arrow-right"></i>
+          <a href="om-oss.html" class="btn btn--outline-navy mt-8">
+            Om bolaget
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== FEATURED PROPERTY ========== -->
+  <!-- ========== PROPERTY ========== -->
   <section class="section section--grey">
-    <div class="container">
-      <div class="text-center fade-in">
-        <span class="section-tag">Vår fastighet</span>
-        <h2 class="section-title">Skövdevägen 39, Skultorp</h2>
+    <div class="container--narrow">
+      <div class="section-header section-header--center fade-in">
+        <span class="section-label">Fastigheten</span>
+        <h2>Skövdevägen 39, Skultorp</h2>
         <div class="divider divider--center"></div>
         <p class="section-subtitle">
-          Välbelägen fastighet i trivsamma Skultorp – nära naturen och med goda
-          förbindelser till Skövde.
+          Bostadsfastighet i Skultorp, Skövde kommun.
+          Busshållplats nära fastigheten med förbindelser till Skövde.
         </p>
       </div>
 
-      <div style="max-width: 680px; margin: 0 auto;">
-        <div class="property-card fade-in">
-          <div class="property-card__image">
-            <div class="property-card__badge">Vår fastighet</div>
-            <svg viewBox="0 0 400 240" class="property-card__image-icon" style="width:340px" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- Building facade -->
-              <rect x="60" y="60" width="280" height="170" fill="white" rx="4" opacity="0.9"/>
-              <!-- Roof -->
-              <polygon points="200,10 40,65 360,65" fill="white" opacity="0.7"/>
-              <!-- Door -->
-              <rect x="168" y="170" width="64" height="60" fill="#C8A96E" rx="3" opacity="0.9"/>
-              <circle cx="222" cy="202" r="4" fill="white" opacity="0.8"/>
-              <!-- Windows top -->
-              <rect x="85" y="85" width="52" height="44" fill="#1B2C4E" rx="2" opacity="0.4"/>
-              <rect x="174" y="85" width="52" height="44" fill="#1B2C4E" rx="2" opacity="0.4"/>
-              <rect x="263" y="85" width="52" height="44" fill="#C8A96E" rx="2" opacity="0.3"/>
-              <!-- Windows bottom -->
-              <rect x="85" y="148" width="52" height="44" fill="#C8A96E" rx="2" opacity="0.3"/>
-              <rect x="263" y="148" width="52" height="44" fill="#1B2C4E" rx="2" opacity="0.4"/>
-              <!-- Ground line -->
-              <rect x="0" y="228" width="400" height="12" fill="white" opacity="0.15" rx="2"/>
-              <!-- Trees -->
-              <rect x="12" y="175" width="10" height="65" fill="white" opacity="0.2"/>
-              <ellipse cx="17" cy="162" rx="22" ry="30" fill="white" opacity="0.12"/>
-              <rect x="378" y="185" width="10" height="55" fill="white" opacity="0.2"/>
-              <ellipse cx="383" cy="172" rx="20" ry="26" fill="white" opacity="0.12"/>
-            </svg>
+      <div class="property-card fade-in">
+        <div class="property-card__image">
+          <div class="property-card__badge">Vår fastighet</div>
+          <svg viewBox="0 0 400 220" class="building-svg" style="width:320px" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="60" y="50" width="280" height="162" fill="white" rx="3" opacity="0.85"/>
+            <polygon points="200,8 38,56 362,56" fill="white" opacity="0.6"/>
+            <rect x="168" y="164" width="64" height="48" fill="#B8933F" rx="2" opacity="0.9"/>
+            <circle cx="222" cy="190" r="3.5" fill="white" opacity="0.8"/>
+            <rect x="86" y="78" width="52" height="40" fill="#1B2C4E" rx="2" opacity="0.35"/>
+            <rect x="174" y="78" width="52" height="40" fill="#1B2C4E" rx="2" opacity="0.35"/>
+            <rect x="262" y="78" width="52" height="40" fill="#B8933F" rx="2" opacity="0.25"/>
+            <rect x="86" y="136" width="52" height="40" fill="#B8933F" rx="2" opacity="0.25"/>
+            <rect x="262" y="136" width="52" height="40" fill="#1B2C4E" rx="2" opacity="0.35"/>
+            <rect x="0" y="210" width="400" height="10" fill="white" opacity="0.12" rx="1"/>
+          </svg>
+        </div>
+        <div class="property-card__body">
+          <h3 class="property-card__title">Skövdevägen 39</h3>
+          <p class="property-card__address">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            Skultorp, Skövde kommun
+          </p>
+          <p class="property-card__desc">
+            Fastigheten är belägen i Skultorp, ett lugnt bostadsområde ca 5 km söder
+            om Skövde centrum. Busshållplatsen ligger nära fastigheten.
+          </p>
+          <div class="property-card__tags">
+            <span class="tag"><i class="fa-solid fa-bus" aria-hidden="true"></i>Bussförbindelser</span>
+            <span class="tag"><i class="fa-solid fa-house" aria-hidden="true"></i>Hyresrätter</span>
+            <span class="tag"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Skultorp</span>
           </div>
-          <div class="property-card__body">
-            <h3 class="property-card__title">Skövdevägen 39</h3>
-            <div class="property-card__location">
-              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-              Skultorp, Skövde kommun
-            </div>
-            <p class="property-card__desc">
-              Välskött bostadsfastighet i lugna och trivsamma Skultorp, beläget
-              cirka 5 km söder om Skövde centrum. Omgivningen erbjuder naturskön miljö
-              och goda kommunikationer via buss till Skövde.
-            </p>
-            <div class="property-card__features">
-              <span class="property-card__feature">
-                <i class="fa-solid fa-bus" aria-hidden="true"></i>
-                Goda kommunikationer
-              </span>
-              <span class="property-card__feature">
-                <i class="fa-solid fa-tree" aria-hidden="true"></i>
-                Naturnära läge
-              </span>
-              <span class="property-card__feature">
-                <i class="fa-solid fa-house" aria-hidden="true"></i>
-                Hyresrätter
-              </span>
-              <span class="property-card__feature">
-                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                Välskött fastighet
-              </span>
-            </div>
+          <div class="mt-6" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="lagenheter.html" class="btn btn--primary btn--sm">Se fastigheten</a>
+            <a href="bostadsko.html" class="btn btn--outline-navy btn--sm">Ställ dig i kö</a>
           </div>
         </div>
-      </div>
-
-      <div class="text-center" style="margin-top: 40px;">
-        <a href="lagenheter.html" class="btn btn--outline-navy">
-          Se alla fastigheter
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- ========== WHY CHOOSE US ========== -->
+  <!-- ========== SERVICE ========== -->
   <section class="section">
     <div class="container">
-      <div class="text-center fade-in">
-        <span class="section-tag">Varför välja oss</span>
-        <h2 class="section-title">En hyresvärd du kan lita på</h2>
+      <div class="section-header section-header--center fade-in">
+        <span class="section-label">Vad vi erbjuder</span>
+        <h2>Hyra av oss</h2>
         <div class="divider divider--center"></div>
-        <p class="section-subtitle">
-          Vi sätter hyresgästerna i centrum och arbetar varje dag för att skapa
-          ett tryggt och trivsamt boende.
-        </p>
       </div>
 
       <div class="features-grid">
         <div class="feature-card fade-in fade-delay-1">
           <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-shield-halved"></i>
+            <i class="fa-solid fa-user-shield"></i>
           </div>
-          <h3 class="feature-card__title">Trygg hyresvärd</h3>
+          <h3 class="feature-card__title">Direktkontakt med ägaren</h3>
           <p class="feature-card__desc">
-            Registrerat aktiebolag med solida finanser och långsiktig förvaltning.
-            Du vet alltid vem du hyr av.
+            Ingen förvaltningsbyrå. Du når oss direkt per telefon eller e-post
+            vid frågor eller felanmälan.
           </p>
         </div>
 
         <div class="feature-card fade-in fade-delay-2">
           <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-bolt"></i>
+            <i class="fa-solid fa-file-signature"></i>
           </div>
-          <h3 class="feature-card__title">Snabb service</h3>
+          <h3 class="feature-card__title">Hyresavtal och kö</h3>
           <p class="feature-card__desc">
-            Vi hanterar felanmälningar och frågor snabbt och effektivt.
-            Du ska känna dig sedd och prioriterad som hyresgäst.
+            Standardiserat hyresavtal. Ställ dig i vår bostadskö för att
+            bli kontaktad när en lägenhet blir ledig.
           </p>
         </div>
 
         <div class="feature-card fade-in fade-delay-3">
           <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-map-location-dot"></i>
+            <i class="fa-solid fa-wrench"></i>
           </div>
-          <h3 class="feature-card__title">Bra läge</h3>
+          <h3 class="feature-card__title">Felanmälan</h3>
           <p class="feature-card__desc">
-            Skultorp erbjuder lugn boendemiljö med goda buss&shy;förbindelser
-            till Skövde centrum – det bästa av två världar.
-          </p>
-        </div>
-
-        <div class="feature-card fade-in fade-delay-4">
-          <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-seedling"></i>
-          </div>
-          <h3 class="feature-card__title">Långsiktig förvaltning</h3>
-          <p class="feature-card__desc">
-            Vi bygger och underhåller för framtiden. Fastigheten sköts
-            noggrant för att bevara och öka sin kvalitet över tid.
+            Felanmälan görs via webbplatsen eller telefon.
+            Vi hanterar ärenden löpande.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== TESTIMONIAL ========== -->
-  <section class="section testimonial">
-    <div class="container">
-      <div class="testimonial__inner fade-in">
-        <span class="testimonial__quote-icon" aria-hidden="true">&ldquo;</span>
-        <p class="testimonial__text">
-          "Det bästa med att bo hos CRJ Fastigheter är att man alltid känner sig
-          välkommen att höra av sig. Felanmälningar hanteras snabbt och man märker
-          att hyresvärden bryr sig om sina hyresgäster."
-        </p>
-        <div class="testimonial__author">
-          <div class="testimonial__avatar" aria-hidden="true">MH</div>
-          <div class="testimonial__name">
-            <strong>Maria H.</strong>
-            <span>Hyresgäst i Skultorp sedan 2021</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CTA BANNER ========== -->
+  <!-- ========== CTA ========== -->
   <section class="section cta-banner">
     <div class="container">
-      <div class="cta-banner__inner fade-in">
-        <span class="section-tag">Hitta ditt hem</span>
-        <h2 class="cta-banner__title">Intresserad av en lägenhet?</h2>
-        <p class="cta-banner__subtitle">
-          Registrera ditt intresse idag och bli kontaktad när en lägenhet
-          blir tillgänglig på Skövdevägen 39 i Skultorp.
+      <div class="fade-in">
+        <span class="section-label">Intresserad?</span>
+        <h2>Ställ dig i bostadskön</h2>
+        <p>
+          Vi kontaktar dig när en lägenhet på Skövdevägen 39 i Skultorp
+          blir ledig och matchar ditt intresse.
         </p>
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-          <a href="bostadsko.html" class="btn btn--primary btn--lg">
-            <i class="fa-solid fa-list-ol"></i>
-            Ställ dig i bostadskön
+        <div class="cta-banner__actions">
+          <a href="bostadsko.html" class="btn btn--gold btn--lg">
+            Registrera intresse
           </a>
           <a href="kontakt.html" class="btn btn--outline btn--lg">
-            <i class="fa-solid fa-phone"></i>
-            Ring oss
+            Kontakta oss
           </a>
         </div>
       </div>
@@ -427,43 +317,41 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__grid">
-        <!-- Brand -->
         <div>
-          <div class="footer__brand-name">
-            <div class="navbar__logo-mark" style="width:38px;height:38px;font-size:1rem;">CRJ</div>
-            CRJ Fastigheter AB
+          <div class="footer__brand">
+            <div class="navbar__logo-mark" style="width:36px;height:36px;font-size:0.95rem;">CRJ</div>
+            <div>
+              <div class="footer__brand-name">CRJ Fastigheter AB</div>
+              <div class="footer__brand-sub">Org.nr 559218-7032</div>
+            </div>
           </div>
-          <p class="footer__brand-desc">
-            Välskötta hyresrätter i Skövdeområdet. Vi erbjuder trygga hem med
-            personlig service och långsiktig förvaltning.
+          <p class="footer__desc">
+            Privat fastighetsbolag grundat 2019.
+            Äger och förvaltar hyresrätter i Skultorp, Skövde.
           </p>
-          <span class="footer__orgnr">Org.nr: 559218-7032</span>
+          <span class="footer__orgnr">559218-7032</span>
         </div>
 
-        <!-- Navigation -->
         <div>
-          <p class="footer__heading">Navigation</p>
+          <p class="footer__heading">Sidor</p>
           <ul class="footer__links" role="list">
-            <li><a href="index.html" class="footer__link">Hem</a></li>
-            <li><a href="om-oss.html" class="footer__link">Om oss</a></li>
-            <li><a href="lagenheter.html" class="footer__link">Fastigheter</a></li>
+            <li><a href="om-oss.html" class="footer__link">Om bolaget</a></li>
+            <li><a href="lagenheter.html" class="footer__link">Fastigheten</a></li>
             <li><a href="lediga.html" class="footer__link">Lediga lägenheter</a></li>
             <li><a href="hyresgast.html" class="footer__link">För hyresgäster</a></li>
-            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+            <li><a href="bostadsko.html" class="footer__link">Bostadskö</a></li>
           </ul>
         </div>
 
-        <!-- Legal -->
         <div>
           <p class="footer__heading">Information</p>
           <ul class="footer__links" role="list">
             <li><a href="integritetspolicy.html" class="footer__link">Integritetspolicy</a></li>
             <li><a href="hyresgast.html" class="footer__link">Felanmälan</a></li>
-            <li><a href="lediga.html" class="footer__link">Intresseanmälan</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
           </ul>
         </div>
 
-        <!-- Contact -->
         <div>
           <p class="footer__heading">Kontakt</p>
           <div class="footer__contact-item">
@@ -482,7 +370,7 @@
       </div>
 
       <div class="footer__bottom">
-        <span>&copy; 2025 CRJ Fastighets AB (559218-7032). Alla rättigheter förbehållna.</span>
+        <span>&copy; 2025 CRJ Fastigheter AB (559218-7032)</span>
         <div class="footer__bottom-links">
           <a href="integritetspolicy.html" class="footer__bottom-link">Integritetspolicy</a>
           <a href="kontakt.html" class="footer__bottom-link">Kontakt</a>
@@ -491,14 +379,12 @@
     </div>
   </footer>
 
-  <!-- ========== COOKIE BANNER ========== -->
+  <!-- Cookie Banner -->
   <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookiesamtycke">
     <div class="container">
       <div class="cookie-banner__inner">
         <p class="cookie-banner__text">
-          <i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>
-          &nbsp;Vi använder cookies för att förbättra din upplevelse på vår webbplats.
-          Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.
+          Vi använder cookies. Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.
         </p>
         <div class="cookie-banner__actions">
           <button class="cookie-btn cookie-btn--decline">Avböj</button>

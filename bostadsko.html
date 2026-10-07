@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bostadskö – CRJ Fastigheter AB. Anmäl ditt intresse och ställ dig i kön för en lägenhet i Skultorp.">
+  <meta name="description" content="Bostadskö – CRJ Fastigheter AB. Se dina köplatser och ställ dig i kö för lägenhet i Skultorp.">
   <title>Bostadskö – CRJ Fastigheter AB</title>
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='60' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23B8933F' font-weight='700'>C</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -17,20 +17,20 @@
 <body>
 
   <!-- ========== NAVBAR ========== -->
-  <nav class="navbar" aria-label="Huvudnavigation">
+  <nav class="navbar">
     <div class="container">
       <div class="navbar__inner">
-        <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB – Startsida">
+        <a href="index.html" class="navbar__logo">
           <div class="navbar__logo-mark">CRJ</div>
           <div class="navbar__logo-text">
-            <span class="navbar__logo-name">CRJ Fastigheter</span>
-            <span class="navbar__logo-sub">Fastighets AB</span>
+            <span class="navbar__logo-name">CRJ Fastigheter AB</span>
+            <span class="navbar__logo-sub">Org.nr 559218-7032</span>
           </div>
         </a>
         <ul class="navbar__nav" role="list">
           <li><a href="index.html" class="navbar__link">Hem</a></li>
-          <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
-          <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
+          <li><a href="om-oss.html" class="navbar__link">Om bolaget</a></li>
+          <li><a href="lagenheter.html" class="navbar__link">Fastigheten</a></li>
           <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
           <li><a href="bostadsko.html" class="navbar__link active">Bostadskö</a></li>
           <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
@@ -43,12 +43,11 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="navbar__mobile" role="dialog" aria-label="Mobilmeny">
     <button class="navbar__mobile-close" aria-label="Stäng meny"><i class="fa-solid fa-xmark"></i></button>
     <a href="index.html" class="navbar__mobile-link">Hem</a>
-    <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
-    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
+    <a href="om-oss.html" class="navbar__mobile-link">Om bolaget</a>
+    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheten</a>
     <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
     <a href="bostadsko.html" class="navbar__mobile-link">Bostadskö</a>
     <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
@@ -56,8 +55,8 @@
     <div id="navbar-mobile-auth"></div>
   </div>
 
-  <!-- ========== PAGE HERO ========== -->
-  <section class="hero hero--page" aria-label="Bostadskö">
+  <!-- ========== HERO ========== -->
+  <section class="hero hero--page">
     <div class="hero__bg-pattern" aria-hidden="true">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -71,185 +70,105 @@
     <div class="hero__bg-overlay" aria-hidden="true"></div>
     <div class="container">
       <div class="hero__content">
-        <div class="hero__tag">
-          <i class="fa-solid fa-list-ol"></i>
-          Bostadskön
-        </div>
-        <h1 class="hero__title">Ställ dig i <em>bostadskön</em></h1>
+        <div class="hero__tag">Bostadskö</div>
+        <h1 class="hero__title">Mina köer</h1>
         <p class="hero__subtitle">
-          Anmäl ditt intresse för en lägenhet på Skövdevägen 39 i Skultorp.
-          Vi kontaktar dig när en passande lägenhet blir ledig.
+          Se dina aktiva köplatser och ställ dig i kö för lägenhet
+          på Skövdevägen 39 i Skultorp.
         </p>
-        <div class="hero__actions">
-          <a href="#ko-form" class="btn btn--primary btn--lg">
-            <i class="fa-solid fa-file-signature"></i>
-            Anmäl intresse
-          </a>
-          <a href="kontakt.html" class="btn btn--outline btn--lg">
-            <i class="fa-solid fa-phone"></i>
-            Kontakta oss
-          </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MY QUEUES ========== -->
+  <section class="section">
+    <div class="container--narrow">
+
+      <!-- Loading -->
+      <div id="my-queues-loading" style="display:flex;align-items:center;gap:12px;color:var(--text-muted);font-size:0.875rem;padding:20px 0;">
+        <span class="loading-spinner loading-spinner--dark"></span>
+        Hämtar dina köplatser…
+      </div>
+
+      <!-- Not logged in -->
+      <div id="my-queues-noauth" style="display:none;">
+        <div class="alert alert--info" style="margin-bottom:20px;">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          <span>
+            Logga in för att se dina aktiva köplatser.
+            Utan konto kan du ändå ställa dig i kö — du hittar din status sedan i bekräftelsemeddelandet.
+          </span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="login.html?next=bostadsko.html" class="btn btn--primary">Logga in</a>
+          <a href="login.html?tab=register&next=bostadsko.html" class="btn btn--outline-navy">Skapa konto</a>
         </div>
       </div>
+
+      <!-- Empty state -->
+      <div id="my-queues-empty" style="display:none;">
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">
+          Du har inga aktiva köplatser.
+        </p>
+        <a href="lagenheter.html#ko-sektion" class="btn btn--primary">
+          Ställ dig i kö för Skövdevägen 39
+        </a>
+      </div>
+
+      <!-- Queue entries rendered here -->
+      <div id="my-queues-container"></div>
+
     </div>
   </section>
 
   <!-- ========== HOW IT WORKS ========== -->
   <section class="section section--grey">
-    <div class="container" style="max-width: 960px;">
-      <div class="text-center fade-in" style="margin-bottom: 48px;">
-        <span class="section-tag">Hur det fungerar</span>
-        <h2 class="section-title">Hur fungerar bostadskön?</h2>
-        <div class="divider divider--center"></div>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-          Vår bostadskö är enkel och transparent. Anmäl ditt intresse och vi hör av oss
-          när en lägenhet som passar dig blir ledig.
-        </p>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-        <div class="feature-card fade-in fade-delay-1">
-          <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-file-signature"></i>
-          </div>
-          <h3 class="feature-card__title">1. Anmäl intresse</h3>
-          <p class="feature-card__desc">
-            Fyll i formuläret med dina kontaktuppgifter och önskemål om lägenhetsstorlek och inflyttning.
-          </p>
-        </div>
-        <div class="feature-card fade-in fade-delay-2">
-          <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-bell"></i>
-          </div>
-          <h3 class="feature-card__title">2. Bli notifierad</h3>
-          <p class="feature-card__desc">
-            Vi kontaktar dig personligen när en lägenhet som matchar dina önskemål blir tillgänglig.
-          </p>
-        </div>
-        <div class="feature-card fade-in fade-delay-3">
-          <div class="feature-card__icon" aria-hidden="true">
-            <i class="fa-solid fa-handshake"></i>
-          </div>
-          <h3 class="feature-card__title">3. Visning &amp; kontrakt</h3>
-          <p class="feature-card__desc">
-            Vi bokar en visning och om det passar skriver vi kontrakt.
-            Enkelt, tryggt och personligt.
-          </p>
-        </div>
-      </div>
-
-      <div style="margin-top: 48px;" class="fade-in">
-        <div class="info-box">
-          <p>
-            <strong>Notera:</strong> Vi har ingen formell kötid. Vi kontaktar intresserade utifrån
-            lägenhetens storlek och dina önskemål.
-            <a href="login.html" style="color: var(--navy); font-weight: 600;">Logga in</a>
-            för att kunna följa statusen på din anmälan.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== QUEUE FORM ========== -->
-  <section class="section" id="ko-form">
-    <div class="container" style="max-width: 760px;">
-      <div class="text-center fade-in" style="margin-bottom: 48px;">
-        <span class="section-tag">Anmäl intresse</span>
-        <h2 class="section-title">Registrera dig i bostadskön</h2>
+    <div class="container--narrow">
+      <div class="section-header section-header--center fade-in">
+        <span class="section-label">Information</span>
+        <h2>Hur bostadskön fungerar</h2>
         <div class="divider divider--center"></div>
       </div>
 
-      <!-- Shown when user already in queue -->
-      <div id="already-in-queue" style="display:none;" class="fade-in">
-        <div style="background: white; border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-md); text-align: center; border: 1px solid var(--grey-mid);">
-          <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(72,187,120,0.12); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 1.8rem; color: #276749;">
-            <i class="fa-solid fa-circle-check"></i>
-          </div>
-          <h3 style="margin-bottom: 12px; color: var(--navy);">Du är redan anmäld!</h3>
-          <p style="margin-bottom: 8px;">Din anmälan finns registrerad i bostadskön.</p>
-          <p id="queue-status-text" style="margin-bottom: 24px; font-size: 0.9rem; color: var(--text-muted);"></p>
-          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-            <a href="dashboard.html" class="btn btn--primary">
-              <i class="fa-solid fa-user-circle"></i>
-              Se min status
-            </a>
-            <a href="kontakt.html" class="btn btn--outline-navy">
-              <i class="fa-solid fa-envelope"></i>
-              Kontakta oss
-            </a>
-          </div>
+      <div class="steps fade-in">
+        <div class="step">
+          <div class="step__number">1</div>
+          <div class="step__title">Registrera intresse</div>
+          <p class="step__desc">
+            Fyll i dina uppgifter och eventuella önskemål om lägenhetstyp.
+            Ingen inloggning krävs.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <div class="step__title">Vi kontaktar dig</div>
+          <p class="step__desc">
+            Vi hör av oss när en lägenhet som kan matcha ditt intresse
+            blir ledig för uthyrning.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <div class="step__title">Visning och avtal</div>
+          <p class="step__desc">
+            Vi bokar en visning och, om det passar båda parter,
+            skriver vi hyresavtal.
+          </p>
         </div>
       </div>
 
-      <!-- Form -->
-      <div id="queue-form-wrapper" class="fade-in" style="background: white; border-radius: var(--radius-lg); padding: 48px; box-shadow: var(--shadow-md); border: 1px solid var(--grey-mid);">
+      <div class="info-box fade-in mt-8">
+        Vi har ingen formell kötid. Vi kontaktar intresserade utifrån
+        lägenhetstyp och ditt uppgivna intresse. Har du frågor kan du
+        kontakta oss på
+        <a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a>
+        eller 073-544 33 62.
+      </div>
 
-        <div id="login-prompt" style="display:none; background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.3); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 24px; font-size: 0.9rem; color: var(--text-dark);">
-          <i class="fa-solid fa-circle-info" style="color: var(--gold); margin-right: 8px;"></i>
-          <a href="login.html?next=bostadsko.html" style="color: var(--navy); font-weight: 600;">Logga in</a>
-          för att spåra din anmälan och automatiskt fylla i dina uppgifter.
-        </div>
-
-        <form id="queue-form" novalidate aria-label="Bostadsköanmälan">
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="q-name">Förnamn och efternamn <span style="color:#e05252;">*</span></label>
-              <input type="text" id="q-name" name="full_name" placeholder="Anna Andersson" required autocomplete="name">
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-            <div class="form-group">
-              <label for="q-phone">Telefonnummer <span style="color:#e05252;">*</span></label>
-              <input type="tel" id="q-phone" name="phone" placeholder="070-123 45 67" required autocomplete="tel">
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="q-email">E-postadress <span style="color:#e05252;">*</span></label>
-            <input type="email" id="q-email" name="email" placeholder="anna@example.se" required autocomplete="email">
-            <span class="form-error" aria-live="polite"></span>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="q-size">Önskad lägenhetstyp <span style="color:#e05252;">*</span></label>
-              <select id="q-size" name="preferred_size" required>
-                <option value="">Välj storlek</option>
-                <option value="1rok">1 rum och kök (1 rok)</option>
-                <option value="2rok">2 rum och kök (2 rok)</option>
-                <option value="3rok">3 rum och kök (3 rok)</option>
-                <option value="4rok+">4 rok eller större</option>
-                <option value="spelar ingen roll">Spelar ingen roll</option>
-              </select>
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-            <div class="form-group">
-              <label for="q-move">Önskad inflyttning</label>
-              <input type="text" id="q-move" name="move_date" placeholder="T.ex. Omgående eller jan 2026">
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="q-notes">Övrig information</label>
-            <textarea id="q-notes" name="notes" placeholder="Berätta gärna mer. Har du husdjur? Behöver du parkering? Annat vi bör veta?" rows="4"></textarea>
-          </div>
-
-          <div style="background: var(--grey-light); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; display: flex; gap: 12px; align-items: flex-start;">
-            <i class="fa-solid fa-lock" style="color: var(--gold); margin-top: 2px; flex-shrink:0;" aria-hidden="true"></i>
-            <span>Dina uppgifter behandlas konfidentiellt och används enbart för att kontakta dig angående lediga lägenheter. Läs vår <a href="integritetspolicy.html" style="color: var(--navy); font-weight: 500;">integritetspolicy</a>.</span>
-          </div>
-
-          <button type="submit" class="btn btn--primary" id="queue-submit-btn" style="width: 100%; justify-content: center; padding: 18px;">
-            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-            Anmäl intresse
-          </button>
-
-          <div class="form-success" id="queue-success" role="alert"></div>
-          <div class="form-error" id="queue-error" style="margin-top:12px; font-size:0.9rem; display:none;"></div>
-        </form>
+      <div class="mt-8 text-center fade-in">
+        <a href="lagenheter.html#ko-sektion" class="btn btn--primary btn--lg">
+          Ställ dig i kö — Skövdevägen 39
+        </a>
       </div>
     </div>
   </section>
@@ -259,22 +178,22 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <div class="footer__brand-name">
-            <div class="navbar__logo-mark" style="width:38px;height:38px;font-size:1rem;">CRJ</div>
-            CRJ Fastigheter AB
+          <div class="footer__brand">
+            <div class="navbar__logo-mark" style="width:36px;height:36px;font-size:0.95rem;">CRJ</div>
+            <div>
+              <div class="footer__brand-name">CRJ Fastigheter AB</div>
+              <div class="footer__brand-sub">Org.nr 559218-7032</div>
+            </div>
           </div>
-          <p class="footer__brand-desc">Välskötta hyresrätter i Skövdeområdet. Trygg förvaltning sedan 2019.</p>
-          <span class="footer__orgnr">Org.nr: 559218-7032</span>
+          <p class="footer__desc">Privat fastighetsbolag grundat 2019. Hyresrätter i Skultorp, Skövde.</p>
         </div>
         <div>
-          <p class="footer__heading">Navigation</p>
+          <p class="footer__heading">Sidor</p>
           <ul class="footer__links" role="list">
-            <li><a href="index.html" class="footer__link">Hem</a></li>
-            <li><a href="om-oss.html" class="footer__link">Om oss</a></li>
-            <li><a href="lagenheter.html" class="footer__link">Fastigheter</a></li>
+            <li><a href="om-oss.html" class="footer__link">Om bolaget</a></li>
+            <li><a href="lagenheter.html" class="footer__link">Fastigheten</a></li>
             <li><a href="lediga.html" class="footer__link">Lediga lägenheter</a></li>
             <li><a href="hyresgast.html" class="footer__link">För hyresgäster</a></li>
-            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
           </ul>
         </div>
         <div>
@@ -282,18 +201,27 @@
           <ul class="footer__links" role="list">
             <li><a href="integritetspolicy.html" class="footer__link">Integritetspolicy</a></li>
             <li><a href="hyresgast.html" class="footer__link">Felanmälan</a></li>
-            <li><a href="bostadsko.html" class="footer__link">Bostadskö</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
           </ul>
         </div>
         <div>
           <p class="footer__heading">Kontakt</p>
-          <div class="footer__contact-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Mossvägen 4, 541 52 Skövde</span></div>
-          <div class="footer__contact-item"><i class="fa-solid fa-phone" aria-hidden="true"></i><a href="tel:+46735443362">073-544 33 62</a></div>
-          <div class="footer__contact-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a></div>
+          <div class="footer__contact-item">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            <span>Mossvägen 4, 541 52 Skövde</span>
+          </div>
+          <div class="footer__contact-item">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            <a href="tel:+46735443362">073-544 33 62</a>
+          </div>
+          <div class="footer__contact-item">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a>
+          </div>
         </div>
       </div>
       <div class="footer__bottom">
-        <span>&copy; 2025 CRJ Fastighets AB (559218-7032). Alla rättigheter förbehållna.</span>
+        <span>&copy; 2025 CRJ Fastigheter AB (559218-7032)</span>
         <div class="footer__bottom-links">
           <a href="integritetspolicy.html" class="footer__bottom-link">Integritetspolicy</a>
           <a href="kontakt.html" class="footer__bottom-link">Kontakt</a>
@@ -302,10 +230,10 @@
     </div>
   </footer>
 
-  <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookiesamtycke">
+  <div class="cookie-banner" role="dialog" aria-live="polite">
     <div class="container">
       <div class="cookie-banner__inner">
-        <p class="cookie-banner__text"><i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>&nbsp;Vi använder cookies. Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.</p>
+        <p class="cookie-banner__text">Vi använder cookies. <a href="integritetspolicy.html">Integritetspolicy</a>.</p>
         <div class="cookie-banner__actions">
           <button class="cookie-btn cookie-btn--decline">Avböj</button>
           <button class="cookie-btn cookie-btn--accept">Godkänn</button>
@@ -317,117 +245,12 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    const statusLabels = {
-      pending: 'Väntande – vi har tagit emot din anmälan.',
-      contacted: 'Kontaktad – vi har hört av oss!',
-      approved: 'Godkänd – grattis!',
-      rejected: 'Avvisad'
-    };
-
-    async function initPage() {
-      if (!isSupabaseConfigured()) {
-        document.getElementById('login-prompt').style.display = 'block';
-        return;
-      }
-
-      const user = await getCurrentUser();
-
-      if (user) {
-        // Pre-fill form
-        const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', user.id).single();
-        if (profile) {
-          document.getElementById('q-name').value = profile.full_name || user.user_metadata?.full_name || '';
-          document.getElementById('q-email').value = user.email || '';
-          document.getElementById('q-phone').value = profile.phone || user.user_metadata?.phone || '';
-        }
-
-        // Check if already in queue
-        const { data: existing } = await supabaseClient
-          .from('housing_queue')
-          .select('*')
-          .eq('user_id', user.id)
-          .limit(1);
-
-        if (existing && existing.length > 0) {
-          const entry = existing[0];
-          const statusText = statusLabels[entry.status] || entry.status;
-          document.getElementById('queue-status-text').textContent = `Status: ${statusText}`;
-          document.getElementById('already-in-queue').style.display = 'block';
-          document.getElementById('queue-form-wrapper').style.display = 'none';
-          return;
-        }
-      } else {
-        document.getElementById('login-prompt').style.display = 'block';
-      }
-    }
-
-    document.getElementById('queue-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const errorEl = document.getElementById('queue-error');
-      const successEl = document.getElementById('queue-success');
-      errorEl.style.display = 'none';
-      successEl.classList.remove('visible');
-
-      const fullName = document.getElementById('q-name').value.trim();
-      const email = document.getElementById('q-email').value.trim();
-      const phone = document.getElementById('q-phone').value.trim();
-      const size = document.getElementById('q-size').value;
-      const moveDate = document.getElementById('q-move').value.trim();
-      const notes = document.getElementById('q-notes').value.trim();
-
-      if (!fullName || !email || !phone || !size) {
-        errorEl.textContent = 'Fyll i alla obligatoriska fält.';
-        errorEl.style.display = 'block';
-        return;
-      }
-
-      if (!isSupabaseConfigured()) {
-        errorEl.textContent = 'Supabase är inte konfigurerat ännu. Sätt upp dina nycklar i js/supabase-client.js.';
-        errorEl.style.display = 'block';
-        return;
-      }
-
-      const btn = document.getElementById('queue-submit-btn');
-      btn.disabled = true;
-      btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;"></span> Skickar...';
-
-      try {
-        const user = await getCurrentUser();
-        const row = {
-          full_name: fullName,
-          email,
-          phone,
-          preferred_size: size,
-          move_date: moveDate || null,
-          notes: notes || null,
-          user_id: user ? user.id : null
-        };
-
-        const { error } = await supabaseClient.from('housing_queue').insert([row]);
-
-        if (error) {
-          errorEl.textContent = 'Något gick fel. Försök igen eller kontakta oss direkt.';
-          errorEl.style.display = 'block';
-        } else {
-          successEl.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Tack! Din anmälan har tagits emot. Vi hör av oss när en lägenhet blir ledig.' + (user ? ' <a href="dashboard.html" style="color:#276749;font-weight:600;">Se din status →</a>' : ' <a href="login.html" style="color:#276749;font-weight:600;">Logga in för att följa statusen →</a>') + '</span>';
-          successEl.classList.add('visible');
-          document.getElementById('queue-form').reset();
-        }
-      } catch (err) {
-        errorEl.textContent = 'Något gick fel. Försök igen senare.';
-        errorEl.style.display = 'block';
-      }
-
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Anmäl intresse';
-    });
-
-    document.addEventListener('DOMContentLoaded', initPage);
-  </script>
+  <script src="js/queue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initMyQueues);
+  </script>
 </body>
 </html>
