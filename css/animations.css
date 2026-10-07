@@ -1,0 +1,238 @@
+/* ============================================================
+   CRJ Fastigheter AB — Animations
+   ============================================================ */
+
+/* ---- Site Intro Overlay ---- */
+#site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.intro__curtain {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--navy, #1B2C4E);
+  will-change: transform;
+}
+
+.intro__curtain--top {
+  top: 0;
+  height: 50%;
+}
+
+.intro__curtain--bottom {
+  bottom: 0;
+  height: 50%;
+}
+
+.intro__center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  user-select: none;
+}
+
+.intro__mark {
+  width: 84px;
+  height: 84px;
+  border: 2px solid var(--gold, #C8A96E);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--gold, #C8A96E);
+  opacity: 0;
+  transform: scale(0.55) translateY(16px);
+  will-change: transform, opacity;
+  letter-spacing: -0.01em;
+}
+
+.intro__name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+  font-weight: 700;
+  color: #fff;
+  overflow: hidden;
+  height: 1.3em;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.intro__name-inner {
+  display: block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+.intro__line {
+  height: 1px;
+  width: 0;
+  background: var(--gold, #C8A96E);
+  will-change: width;
+  opacity: 0.7;
+}
+
+.intro__sub {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(200, 169, 110, 0.75);
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* ---- Scroll Progress Bar ---- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold, #C8A96E), var(--gold-light, #dfc08d));
+  z-index: 1002;
+  pointer-events: none;
+  transition: width 0.08s linear;
+}
+
+/* ---- Hero entrance (managed by GSAP, fallback for no-JS) ---- */
+.hero-animate .hero__tag,
+.hero-animate .hero__title,
+.hero-animate .hero__subtitle,
+.hero-animate .hero__actions,
+.hero-animate .hero__scroll {
+  will-change: transform, opacity;
+}
+
+/* ---- Building Window Glow ---- */
+@keyframes winPulse {
+  0%, 100% { opacity: 0.1; }
+  50%       { opacity: 0.32; }
+}
+
+@keyframes winPulseGold {
+  0%, 100% { opacity: 0.22; }
+  50%       { opacity: 0.55; }
+}
+
+.win-pulse     { animation: winPulse     3.5s ease-in-out infinite; }
+.win-pulse-g   { animation: winPulseGold 2.8s ease-in-out infinite; }
+
+/* ---- Stats Bar Stagger ---- */
+.stats-bar__item {
+  will-change: transform, opacity;
+}
+
+/* ---- Feature card hover lift ---- */
+.feature-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(27, 44, 78, 0.16);
+}
+
+/* ---- Property card hover ---- */
+.property-card {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 28px 64px rgba(27, 44, 78, 0.18);
+}
+
+/* ---- Gold line reveal ---- */
+.divider--animated {
+  width: 0 !important;
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.divider--animated.visible {
+  width: 56px !important;
+}
+
+.divider--center.divider--animated.visible {
+  width: 72px !important;
+}
+
+/* ---- Section tag fade-slide ---- */
+.section-tag {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-tag.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Navbar logo hover ---- */
+.navbar__logo-mark {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar__logo:hover .navbar__logo-mark {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+/* ---- Button press feedback ---- */
+.btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+              background 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* ---- Stats counter ---- */
+[data-count] {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Page fade-in for non-home pages ---- */
+.page-fade-in {
+  animation: pageFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Queue position indicator ---- */
+@keyframes queuePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(200, 169, 110, 0); }
+}
+
+.queue-position {
+  animation: queuePulse 2.5s ease-in-out infinite;
+}
+
+/* ---- Hamburger to X ---- */
+.navbar__hamburger span {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.2s ease;
+}

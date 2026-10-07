@@ -19,8 +19,21 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
+
+  <!-- ========== SITE INTRO ========== -->
+  <div id="site-intro" aria-hidden="true">
+    <div class="intro__curtain intro__curtain--top"></div>
+    <div class="intro__curtain intro__curtain--bottom"></div>
+    <div class="intro__center">
+      <div class="intro__mark">CRJ</div>
+      <div class="intro__name"><span class="intro__name-inner">CRJ Fastigheter AB</span></div>
+      <div class="intro__line"></div>
+      <div class="intro__sub">Välskötta hem i Skövdeområdet</div>
+    </div>
+  </div>
 
   <!-- ========== NAVBAR ========== -->
   <nav class="navbar" aria-label="Huvudnavigation">
@@ -498,6 +511,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/animations.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
